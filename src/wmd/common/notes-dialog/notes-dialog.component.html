@@ -1,0 +1,30 @@
+<h1 mat-dialog-title><mat-icon>speaker_notes</mat-icon>&nbsp;&nbsp;Notes for user ID: #{{data.id}}. </h1>
+<div mat-dialog-content>
+  <table>
+    <tr>
+      <td>
+        <div *ngFor="let usersNotes of notesService?.data | async | keyvalue">
+          <mat-list *ngFor="let userNote of usersNotes?.value">
+            <mat-list-item *ngIf="userNote.id === data.id">
+              <h5>
+                <mat-icon mat-list-icon>note</mat-icon>&nbsp;
+                <span>{{userNote.note}} at <time>{{ userNote.time }}</time></span>
+              </h5>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <mat-divider></mat-divider>
+  <br>
+  <label for="currentComment">Enter new notes for this patient:</label>
+  <textarea rows="8" [(ngModel)]="note" name="note" class="form-control" id="currentComment"></textarea>
+  <br>
+  <mat-toolbar>
+    <div class="spacer"></div>
+    <button mat-raised-button color="accent" [mat-dialog-close]="true">Done</button>
+    &nbsp;&nbsp;
+    <button mat-raised-button color="primary" (click)="addNote()">Save</button>
+  </mat-toolbar>
+</div>

@@ -1,0 +1,9 @@
+
+<mat-grid-list gutterSize="15" [cols]="mobile ? 1 : 2" rowHeight="6:1">
+  <mat-accordion>
+    <mat-grid-tile *ngFor="let client of clientMonitoringDetails | async; trackBy: client && client.id">
+      <wmd-patient-quick-glance-tile [clientAndVitals]="client">
+      </wmd-patient-quick-glance-tile>
+    </mat-grid-tile>
+  </mat-accordion>
+</mat-grid-list>

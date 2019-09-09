@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Configure Patient Alerts </h1>
+<div mat-dialog-content>
+    <h6 mat-subheader>Setup an notification method for a patient so they are aware of any alerts.</h6>
+      <mat-list>
+        <mat-list-item>      
+          <mat-select [value]="patientRepositoryService.patientNamesAndIds[0].value" [placeholder]="patientRepositoryService.patientNamesAndIds[0].name">
+            <mat-option *ngFor="let patient of patientRepositoryService.patientNamesAndIds" value="patient.value">
+              {{ patient.name }}
+            </mat-option>
+          </mat-select>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-form-field>
+            <mat-slide-toggle>Notify</mat-slide-toggle>&nbsp;
+            <input type='text' value='"ddaniels@genhospital.org"' matInput placeholder="Email">
+          </mat-form-field>
+        </mat-list-item>
+        <mat-list-item>
+            <mat-form-field>
+              <mat-slide-toggle>Notify</mat-slide-toggle>&nbsp;
+              <input type='text' value='"561 321 - 1889' matInput placeholder="Phone Number">
+            </mat-form-field>
+          </mat-list-item>  
+      </mat-list>
+    <nav flex>
+        <div class="spacer"></div>
+        <button mat-flat-button>Add a notification method</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" >Done</button>
+    </nav>
+</div>

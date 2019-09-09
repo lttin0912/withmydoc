@@ -1,0 +1,314 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">Patient profile</span>
+</mat-toolbar>
+<form   
+  [formGroup]="formGroup" 
+  (ngSubmit)="onSubmit(formGroup.value, $event)" 
+  class="form" 
+  style="margin: 1em" 
+  class="container" 
+  novalidate>
+  <h3 style="margin-top: 1em">Personal details</h3>
+  <mat-divider></mat-divider>
+  <fieldset>
+    <mat-form-field>
+        <mat-select 
+        placeholder="Name prefix" formControlName="namePrefix">
+          <mat-option *ngFor="let namePrefix of namePrefixes" [value]="namePrefix.value">
+            {{namePrefix.label}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input 
+        matInput 
+        placeholder="First name" 
+        formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field class="form-element">
+        <input 
+        matInput 
+        placeholder="Middle name prefix" 
+        formControlName="nameMiddle">
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input 
+        matInput 
+        placeholder="Last name" 
+        formControlName="nameLast">
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <mat-select 
+        placeholder='Name suffix' 
+        formControlName='nameSuffix'>
+        <mat-option *ngFor="let nameSuffix of nameSuffixes" [value]="nameSuffix.value">
+            {{nameSuffix.label}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </fieldset>
+  <h3>Email<span *ngIf="emails.length > 1">s</span></h3>
+  <mat-divider></mat-divider>
+  <fieldset
+    *ngFor="let email of emails; let i = index"
+    formArrayName="contactEmail">
+    <h4 style="padding-top: 1em; " *ngIf="emails.length > 1">
+        Email {{(i+1)}}
+    </h4>
+    <span 
+      [formGroupName]="i">
+      <mat-form-field 
+        class="form-element">
+        <input 
+          [placeholder]="'Email'"   
+          type="text" 
+          matInput 
+          formControlName="emailAddress">
+        </mat-form-field>
+        <mat-form-field 
+          class="form-element">
+            <mat-select 
+        placeholder='Email type' 
+        formControlName='emailType'>
+          <mat-option *ngFor="let type of contactTypes" [value]="type.value">
+              {{type.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle 
+        [disabled]="i === 0 && emails.length === 1 || (emails[i].get('emailPrimary').value === true) || (emails[i].get('emailPrimary').value === 'true')"
+          type="text"
+          (change)="primaryInstanceInFormArrayChange(
+            'contactEmail', 
+            'emailPrimary',
+            $event, 
+            +i)"    
+          [checked]="(emails[i].get('emailPrimary').value === true) || (emails[i].get('emailPrimary').value === 'true')">
+          Primary Email
+        </mat-slide-toggle>
+      </span>
+      <button 
+      mat-raised-button
+      *ngIf="i !== 0"
+      (click)="deleteEmailByIndex(i)">
+      <mat-icon>remove</mat-icon>
+      Delete email</button>
+    <button 
+    *ngIf="i === emails?.length - 1"
+    mat-raised-button 
+    color="primary"
+    (click)="addEmail($event)">
+        <mat-icon>add</mat-icon>
+          Add email
+    </button>
+    <div>
+      <mat-divider></mat-divider>
+    </div>
+  </fieldset>
+  <h3>Address<span *ngIf="address.length > 1">es</span></h3>
+  <mat-divider></mat-divider>
+  <fieldset 
+    *ngFor="let addressDetails of address; let i = index"
+    formArrayName="address">
+      <h4 style="padding-top: 1em; " *ngIf="address.length > 1">
+        Address {{(i+1)}}
+      </h4>
+      <span [formGroupName]="i">
+        <mat-form-field>
+          <input 
+            type="text"
+            matInput
+            [placeholder]="'Address line A'"
+            formControlName="address1">
+        </mat-form-field>
+        <mat-form-field>
+          <input 
+            type="text"
+            matInput
+            [placeholder]="'Address line B'" 
+            formControlName="address2">
+        </mat-form-field>
+        <mat-form-field>
+          <input 
+            type="text"
+            matInput
+            [placeholder]="'Address line C'" 
+            formControlName="address3">
+        </mat-form-field>
+        <!-- ToDo: Make the zip code in UI only put a dash between first and second entries-->
+        <mat-form-field>
+            <input 
+              type="text" 
+              matInput
+              [placeholder]="'Zip code '" 
+              formControlName="zip">
+        </mat-form-field>
+        <mat-form-field>
+            <input 
+              type="text"
+              matInput
+              [placeholder]="'Zip code 2'" 
+              formControlName="zip4">
+          </mat-form-field> 
+          <mat-form-field>
+            <input 
+              type="text"
+              matInput
+              [placeholder]="'Website URL'" 
+              formControlName="url">
+          </mat-form-field> 
+          <mat-form-field>
+            <!-- 
+              ToDo: Change this to photo in the model once the API has the change also 
+            -->
+            <input 
+              type="text"
+              matInput
+              [placeholder]="'Photo'" 
+              formControlName="logo">
+          </mat-form-field> 
+          <mat-form-field>
+          <mat-select 
+        placeholder='Timezone' 
+        formControlName='addressUTCOffset'>
+          <mat-option 
+            *ngFor="let timezone of timezones" 
+            [value]="timezone.value.toString()">
+            {{ timezone.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select 
+          placeholder="State" 
+          formControlName="stateProv">
+          <mat-option 
+            *ngFor="let state of states" 
+            [value]="state">
+            {{ state }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-slide-toggle 
+      [disabled]="i === 0 && address.length === 1 || ((address[i].get('primaryAddress').value === true) || address[i].get('primaryAddress').value === 'true')"
+      type="text"
+      (change)="primaryInstanceInFormArrayChange(
+        'address', 
+        'primaryAddress',
+        $event, 
+        +i)" 
+      [checked]="(address[i].get('primaryAddress').value === true) || address[i].get('primaryAddress').value === 'true'">
+        Primary Address
+    </mat-slide-toggle>
+    </span>
+    <button 
+    mat-raised-button
+    *ngIf="i !== 0"
+    (click)="deleteAddressByIndex(i)">
+    <mat-icon>remove</mat-icon>
+    Delete address</button>
+    <button 
+      mat-raised-button
+      color="primary"
+      *ngIf="i === address?.length - 1"
+      (click)="addAddress($event)">
+      <mat-icon>add</mat-icon>
+      Add address</button>
+      <mat-divider *ngIf="i === address.length - 1"></mat-divider>
+  </fieldset>
+  <div flex></div>
+  <h3>Phone number<span *ngIf="phoneNumbers.length > 1">s</span></h3>
+  <mat-divider></mat-divider>
+  <fieldset>
+    <div 
+    *ngFor="let contactPhone of phoneNumbers; let i = index"
+    formArrayName="contactPhone">
+    <h4 style="padding-top: 1em; " 
+        *ngIf="phoneNumbers.length > 1">
+        Phone number {{(i+1)}}
+      </h4>
+      <span [formGroupName]="i">
+          <mat-form-field 
+          class="form-element">
+              <input 
+                type="text" 
+                [placeholder]="'Country code'" 
+                matInput 
+                formControlName="countryCode">
+          </mat-form-field>  
+        <mat-form-field 
+          class="form-element">
+          <!-- Do formatting in UI to force convention but send to API raw. -->
+              <input 
+                type="text" 
+                [placeholder]="'Phone number'" 
+                matInput 
+                formControlName="phoneNumber">
+        </mat-form-field>
+        <mat-form-field 
+        class="form-element">
+            <input 
+              type="text" 
+              [placeholder]="'Phone extension'" 
+              matInput 
+              formControlName="phoneExtension">
+        </mat-form-field>  
+        <mat-form-field 
+        class="form-element">
+          <mat-select 
+            placeholder='Phone type' 
+            formControlName='phoneType'>
+            <mat-option 
+              *ngFor="let type of contactTypes" [value]="type.value">
+              {{type.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle 
+          [disabled]="i === 0 && phoneNumbers.length === 1 || (phoneNumbers[i].get('phonePrimary')?.value === 'true') || (phoneNumbers[i].get('phonePrimary')?.value === true)"
+          type="text"
+          (change)="primaryInstanceInFormArrayChange(
+            'contactPhone', 
+            'phonePrimary',
+            $event, 
+            +i)" 
+          [checked]="(phoneNumbers[i].get('phonePrimary')?.value === 'true') || (phoneNumbers[i].get('phonePrimary')?.value === true)">
+            Primary Number
+        </mat-slide-toggle>
+        <button 
+        mat-raised-button
+        *ngIf="i !== 0"
+        (click)="deletePhoneNumberByIndex(i)">
+        <mat-icon>remove</mat-icon>
+        Delete phone number</button>
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="i === phoneNumbers?.length - 1"
+        (click)="addPhoneNumber($event)">
+      <mat-icon>add</mat-icon>
+      Add phone number</button>
+      </span>
+    </div>
+    <mat-divider *ngIf="i !== (phoneNumbers.length - 1)"></mat-divider>
+  </fieldset>
+  <div flex></div>
+  <div style="text-align: right; margin-top: 1em;">
+      <button
+      [disabled]="!formGroup.touched"
+      (click)="onReset($event)"
+      mat-raised-button  
+      type="button">
+      Reset
+    </button>
+    &nbsp;
+    &nbsp;
+    <button 
+      mat-raised-button 
+      color="primary" 
+      type="submit"  
+      [disabled]="!formGroup.valid || !formGroup.touched">
+      Submit
+    </button>
+  </div>
+</form>

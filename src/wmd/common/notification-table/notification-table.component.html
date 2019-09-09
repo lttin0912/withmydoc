@@ -1,0 +1,17 @@
+<table class="table table-striped table-hover ">
+
+  <thead class="thead-dark">
+  <tr>
+    <th *ngFor="let col of columns"  scope="col" >
+      {{col}}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let char of characters | async" scope="row"  >
+    <td *ngFor="let col of columns">
+      {{char[col]}}
+    </td>
+  </tr>
+  </tbody>
+</table>

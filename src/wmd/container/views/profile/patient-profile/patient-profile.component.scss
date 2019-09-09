@@ -1,0 +1,39 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+}
+
+h4 {
+  color: #999;
+  font-size: 0.8em;
+  text-align: right;
+}
+  
+  .profile-container > * {
+    width: 100%;
+  }
+  
+  .profile-container form {
+    margin-bottom: 20px;
+  }
+  
+  .profile-container form > * {
+    margin: 5px 0;
+  }
+  
+  .profile-container .mat-radio-button {
+    margin: 0 12px;
+  }
+
+  .mat-raised-button {
+    margin-bottom: 2em;
+    margin-left: 1em;
+  }
+
+  .mat-form-field {
+    margin: 1em;
+  }
+
+  .mat-divider {
+    margin: 1em;
+  }

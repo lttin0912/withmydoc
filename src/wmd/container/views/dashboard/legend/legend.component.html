@@ -1,0 +1,8 @@
+<legend class="wmd-legend-items">
+    <div (click)="handleOkSelect()" class="wmd-legend-item wmd-legend-item-ok"><span *ngIf="okPatientsVisible" class="fas fa-check"></span></div>
+    <span class="wmd-legend-item wmd-legend-label-ok">OK</span>
+    <div (click)="handleWarningSelect()" class="wmd-legend-item wmd-legend-item-warning"><span *ngIf="warningPatientsVisible" class="fas fa-check"></span></div>
+    <span class="wmd-legend-item wmd-legend-label-warning">Warning</span>
+    <div (click)="handleCriticalSelect()" class="wmd-legend-item wmd-legend-item-critical"><span *ngIf="criticalPatientsVisible" class="fas fa-check"></span></div>
+    <span class="wmd-legend-item wmd-legend-label-critical">Critical</span>
+</legend>

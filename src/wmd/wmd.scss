@@ -1,0 +1,201 @@
+@import './variables.scss';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+// Define the default theme.
+@include mat-core();
+@include angular-material-theme(
+  mat-light-theme(
+    $primaryPalette,
+    $accentPalette,
+    $warnPalette));
+
+// Reset box model.
+html
+body, 
+wmd-root * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/**
+ * Globally applicable styles here.
+ */
+ 
+ flex,
+ .flex,
+ [flex] {
+  display: flex;
+ }
+
+ spacer,
+ .spacer,
+ [spacer] {
+  display: block;
+  flex: 1 1 auto;
+ }
+
+.wmd-icon {
+  padding: 0 14px;
+  color: #000;
+  font-size: 1.8em;
+}
+
+.wmd-dashed-top {
+  border-top: #ccc 1px dashed;
+}
+
+.wmd-spacer {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.wmd-title {
+  color: #fff;
+}
+
+.wmd-menu {
+  .wmd-menu-item {
+    text-align: left;
+    outline: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.wmd-toolbar-large {
+  padding: 0.8em;
+}
+
+.wmd-record-ticket {
+  padding: 1em;
+  border-top: 1px #ccc dashed;
+  border-bottom: 1px #ccc dashed;
+  
+  .wmd-record-title {
+    color: #ccc;
+    font-size: 1em;
+  }
+
+  time {
+    color: #999;
+    font-style: italic;
+  }
+  
+  th {
+    padding: 10px 5px 0;
+    text-align: inherit;
+  }
+}
+
+.wmd-record-ticket:first-child {
+  border-top: 0;
+}
+
+.wmd-record-ticket:last-child {
+  border-bottom: 0;
+}
+
+.wmd-table {
+  width: 100%;
+}
+
+.wmd-hint-text {
+  font-size: 14px;
+  color: #9c9c9c;
+  text-decoration: italic;
+}
+
+.wmd-status-ok,
+.wmd-status-warning,
+.wmd-status-critical {
+  font-size: 32px;
+}
+
+.wmd-status-ok {
+  color: #2FAC66; 
+}
+
+.wmd-status-warning {
+  color: #F89000;
+}
+
+.wmd-status-critical {
+  color: #E01A4F;
+}
+
+wmd-dashboard {
+  display: block;
+  background-color: #efefef;
+  display: block;
+  padding: 2.4em;
+  min-height: 58.2%;
+  min-height: 58.2vh;
+}
+
+/**
+ * Global level material theme overrides.
+ */
+wmd-root { 
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  button:focus,
+  button:active {
+    outline: 0;
+  }
+
+  .ngx-charts {
+    padding: 1em;
+  }
+
+  .mat-grid-list {
+    margin-top: -0.8em;
+  }
+
+  .mat-accordion .mat-expansion-panel.mat-expanded {
+    overflow: visible;
+    padding-top: 1em;
+  }
+
+  mat-mini-fab {
+    box-shadow: none; 
+    width: 15px; 
+    height: 15px;  
+  }
+
+  mat-expansion-panel-body {
+    mat-divider {
+      padding: 1em 0;
+      margin-top: -1em;
+    }
+  }
+
+  .wmd-fab-group {
+    left: 1em;
+    display: block;
+    position: relative;
+    .mat-mini-fab {
+      margin-right: 1em;
+      box-shadow: none;
+      display: inline-block;
+    }
+  }
+  
+  .mat-accordion {
+      width: 100%;
+      margin: 0 5px;
+      .mat-expansion-panel.mat-expanded.mat-expansion-panel-spacing {
+        z-index: 2;
+        position: relative;
+      }
+  }
+  .mat-grid-tile {
+    overflow: visible;
+  }
+  .mat-form-field-wrapper {
+    padding-bottom: 1.25em;
+  }
+}

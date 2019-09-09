@@ -1,0 +1,115 @@
+<div>
+  <table class="table table-striped table-hover ">
+
+    <thead class="thead-dark">
+    <tr scope="row">
+      <!--    <th *ngFor="let col of alertColumns"  scope="col" >-->
+      <!--      {{col}}-->
+      <!--    </th>-->
+      <th scope="col" > {{'Name'}} </th>
+      <th scope="col" > {{'Parameter'}} </th>
+      <th scope="col" > {{'Minimum Value'}} </th>
+      <th scope="col" > {{'Min Severity'}} </th>
+      <th scope="col" > {{'Maximum Value'}} </th>
+      <th scope="col" > {{'Max Severity'}} </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let alert of alertRules | async" scope="row"  (dblclick)="openEditAlertRuleDialog(alert)">
+      <td >
+        {{getClientName(alert['id'])}}
+      </td>
+      <td >
+        {{alert['parameterLabel']}}
+      </td>
+      <td >
+        {{alert['MIN_VAL']}}
+      </td>
+      <td >
+        {{alert['min_severity']}}
+      </td>
+      <td >
+        {{alert['MAX_VAL']}}
+      </td>
+      <td >
+        {{alert['max_severity']}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<br><br>
+
+<div class="example-button-row ml-3">
+  <button mat-raised-button color="primary" [disabled]="disableNewAlertButton" (click)="onNewAlertRule()">Create New Alert</button>
+</div>
+
+<br><br>
+
+
+<div *ngIf="showNewAlertForm" class="ml-3">
+
+  <label class="h2" >New Alert Rule </label>
+  <form class="example-form" (ngSubmit)="onSaveAlert(newAlertForm)" #newAlertForm="ngForm">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Patient Name" aria-label="Number" matInput [formControl]="patientFormControl" [matAutocomplete]="auto"
+      >
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let client of filteredOptions | async" [value]="client.firstName.trim()+' '+client.lastName.trim()">
+          {{client.firstName.trim()+' '+client.lastName.trim()}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Select Parameter" width="100%" id="parameter" name="parameter" ngModel (selectionChange)="parameterChanged($event)">
+        <mat-option value="weight">Weight</mat-option>
+        <mat-option value="systolic-blood-pressure">Systolic Blood Pressure</mat-option>
+        <mat-option value="diastolic-blood-pressure">Diastolic Blood Pressure</mat-option>
+        <mat-option value="heartrate">Heart Rate</mat-option>
+        <mat-option value="temperature">Temperature</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <table>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Min Value" id="minVal" name="minVal" ngModel>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Min Value Severity</mat-label>
+            <mat-select [(value)]="selected" id="min_severity" name="min_severity" ngModel>
+              <mat-option>None</mat-option>
+              <mat-option value="Warning">Warning</mat-option>
+              <mat-option value="Critical">Critical</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Max Value" id="maxVal" name="maxVal" ngModel>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <mat-label>Max Value Severity</mat-label>
+            <mat-select [(value)]="selected" id="max_severity" name="max_severity" ngModel>
+              <mat-option>None</mat-option>
+              <mat-option value="Warning">Warning</mat-option>
+              <mat-option value="Critical">Critical</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" type="submit" >Save Alert</button>
+    </div>
+  </form>
+  <br><br>
+</div>

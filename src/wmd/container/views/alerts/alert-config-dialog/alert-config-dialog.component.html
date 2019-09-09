@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>{{data.parameterLabel}} for: {{alertsService.getClientName(data.id)}}. </h1>
+<div mat-dialog-content>
+  <mat-divider></mat-divider>
+  <br>
+  <form class="example-form" (ngSubmit)="updateAlert(editAlertForm)" #editAlertForm="ngForm">
+    <input type="hidden"  id="clientId" name="clientId" ngModel />
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="minVal">Minimum Value</label>
+        <input type="text" class="form-control" id="minVal" name="minVal"  [(ngModel)]="data.MIN_VAL">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="minValSeverity">Severity</label>
+        <input type="text" class="form-control" id="minValSeverity"  name="minValSeverity" [(ngModel)]="data.min_severity" ngModel>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="maxVal">Maximum Value</label>
+        <input type="text" class="form-control" id="maxVal" name="maxVal" [(ngModel)]="data.MAX_VAL">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="maxValSeverity">Severity</label>
+        <input type="text" class="form-control" id="maxValSeverity" name="maxValSeverity" [(ngModel)]="data.max_severity">
+      </div>
+    </div>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" [mat-dialog-close]="true" >Done</button>
+    </div>
+  </form>
+</div>

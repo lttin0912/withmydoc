@@ -1,0 +1,61 @@
+<table class="table table-striped table-hover ">
+
+  <thead class="thead-dark">
+  <tr>
+    <!--    <th *ngFor="let col of columns"  scope="col" >-->
+    <!--      {{col}}-->
+    <!--    </th>-->
+
+    <th scope="col" >Name</th>
+    <th scope="col" >Date/Time</th>
+    <th scope="col" >Systolic</th>
+    <th scope="col" >Diastolic</th>
+    <th scope="col" >Weight</th>
+    <th scope="col" >Temp</th>
+    <th scope="col" >Respitory Rate</th>
+    <th scope="col" >Pulse</th>
+
+    <th scope="col" >Time Spent</th>
+
+    <th scope="col">
+      {{ 'Action' }}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <!--  <tr *ngFor="let alert of alertsList | async" scope="row"  >-->
+  <!--    <td *ngFor="let col of columns" [ngStyle]="{color:(alert['severity']==='Critical')?'red':'blue'}">-->
+  <!--      {{alert[col]}}-->
+  <!--    </td>-->
+  <tr *ngFor="let vital of vitalsList | async" scope="row"  >
+    <td>
+      {{ getClientName(vital['id']) }}
+    </td>
+    <td>
+      {{vital['dateTime']}}
+    </td>
+    <td [ngStyle]="{'background-color':getAlertBGColor(vital['id'],vital['systolic'],'systolic-blood-pressure')}">
+      {{vital['systolic']}}
+    </td>
+    <td [ngStyle]="{'background-color':getAlertBGColor(vital['id'],vital['diastolic'],'diastolic-blood-pressure')}">
+      {{vital['diastolic']}}
+    </td>
+    <td [ngStyle]="{'background-color':getAlertBGColor(vital['id'],vital['weight'],'weight')}">
+      {{vital['weight']}}
+    </td>
+    <td [ngStyle]="{'background-color':getAlertBGColor(vital['id'],vital['temp'],'temperature')}">
+      {{vital['temp']}}
+    </td>
+    <td>
+      {{vital['respiratoryRate']}}
+    </td>
+    <td>
+      {{vital['pulse']}}
+    </td>
+
+
+    <td></td>
+    <td><button mat-button (click)="openDialog(vital)">Launch Session</button></td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Session for: {{alertsService.getClientName(data.id)}}. </h1>
+
+<h3>Contact: (954)346 9707</h3>
+<h3>Duration: {{timeConsumedMinutes}}:{{ timeConsumedSeconds%60}} </h3>
+<div mat-dialog-content>
+  <mat-divider></mat-divider>
+  <form class="example-form"  (ngSubmit)= "submitSession(newAlertSessionDialog)" #newAlertSessionDialog="ngForm">
+
+    <table>
+      <tr>
+        <td>
+          <mat-list>
+            <h3 mat-subheader>Comment History</h3>
+            <mat-list-item *ngFor="let comment of commentHistory">
+              <mat-icon mat-list-icon>note</mat-icon>
+              <h4 mat-line>{{comment}}</h4>
+            </mat-list-item>
+          </mat-list>
+        </td>
+      </tr>
+    </table>
+    <mat-divider></mat-divider>
+    <br>
+    <label for="currentComment">Enter comments for this section:</label>
+    <textarea class="form-control" id="currentComment" rows="3"></textarea>
+    <br>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" [mat-dialog-close]="true" >Done</button>
+    </div>
+
+  </form>
+</div>
