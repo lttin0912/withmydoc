@@ -88,7 +88,9 @@ export class PatientProfileComponent implements OnInit {
     private _patientService: PatientService,
     private _router: Router,
     private _notificationsService: NotificationsService
-  ) { }
+  ) {
+    console.log(this.formGroup.value);
+  }
 
   get phoneNumbers(): AbstractControl[] {
     return this._getFormArrayByName(
@@ -193,9 +195,6 @@ export class PatientProfileComponent implements OnInit {
       // This is a new patient creation.
       this._subscriptions.push(
         this._patientService.registerPatient(formData).subscribe((reply: any) => {
-          console.log({
-            reply
-          })
           this._notificationsService.success('Success!');
           this._router.navigate(['first-name/', this.patientDetails.firstName]);
         }));
@@ -286,6 +285,7 @@ export class PatientProfileComponent implements OnInit {
   }
 
   private _viewModelToFormState(viewModel: PatientInterface): FormGroup {
+    console.log({ viewModel });
     return this._formBuilder.group({
       namePrefix: [
         viewModel.namePrefix
@@ -306,13 +306,19 @@ export class PatientProfileComponent implements OnInit {
       ],
       address: this._formBuilder.array(
         viewModel.address.map(
-          address => this._formBuilder.group(address))),
+          address =>
+            this._formBuilder.group(address)
+      )),
       contactEmail: this._formBuilder.array(
         viewModel.contactEmail.map(
-          contactEmail => this._formBuilder.group(contactEmail))),
+          contactEmail =>
+            this._formBuilder.group(contactEmail)
+      )),
       contactPhone: this._formBuilder.array(
         viewModel.contactPhone.map(
-          contactPhone => this._formBuilder.group(contactPhone)))
+          contactPhone =>
+            this._formBuilder.group(contactPhone)
+      ))
     });
   }
 
@@ -321,7 +327,7 @@ export class PatientProfileComponent implements OnInit {
   }
 
   private _intialize(): void {
-    // If details are found,use them instead of defaults.
+    // If details are found, use them instead of defaults.
     this._patientService.patientDetails.subscribe(patientDetails => {
       this._originalFormState = patientDetails;
       this.formGroup = this._viewModelToFormState(patientDetails);

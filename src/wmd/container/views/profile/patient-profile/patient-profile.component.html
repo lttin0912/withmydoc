@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <span class="fill-remaining-space">Patient profile</span>
 </mat-toolbar>
-<form   
+<form     
   [formGroup]="formGroup" 
   (ngSubmit)="onSubmit(formGroup.value, $event)" 
   class="form" 
@@ -16,7 +16,7 @@
         placeholder="Name prefix" formControlName="namePrefix">
           <mat-option *ngFor="let namePrefix of namePrefixes" [value]="namePrefix.value">
             {{namePrefix.label}}
-          </mat-option>
+          </mat-option>   
         </mat-select>
     </mat-form-field>
     <mat-form-field class="form-element">
@@ -48,7 +48,6 @@
     </mat-form-field>
   </fieldset>
   <h3>Email<span *ngIf="emails.length > 1">s</span></h3>
-  <mat-divider></mat-divider>
   <fieldset
     *ngFor="let email of emails; let i = index"
     formArrayName="contactEmail">
@@ -106,7 +105,6 @@
     </div>
   </fieldset>
   <h3>Address<span *ngIf="address.length > 1">es</span></h3>
-  <mat-divider></mat-divider>
   <fieldset 
     *ngFor="let addressDetails of address; let i = index"
     formArrayName="address">
@@ -189,6 +187,32 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-form-field>    
+          <input 
+            formControlName='seasonDate1' 
+            matInput 
+            [matDatepicker]="seasonDate1Picker" 
+            placeholder="Season date 1">
+          <mat-datepicker-toggle 
+            matSuffix 
+            [for]="seasonDate1Picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #seasonDate1Picker>
+          </mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>    
+          <input 
+            formControlName='seasonDate2' 
+            matInput 
+            [matDatepicker]="seasonDate2Picker" 
+            placeholder="Season date 2">
+          <mat-datepicker-toggle 
+            matSuffix 
+            [for]="seasonDate2Picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #seasonDate2Picker>
+          </mat-datepicker>
+      </mat-form-field>
       <mat-slide-toggle 
       [disabled]="i === 0 && address.length === 1 || ((address[i].get('primaryAddress').value === true) || address[i].get('primaryAddress').value === 'true')"
       type="text"
@@ -218,7 +242,6 @@
   </fieldset>
   <div flex></div>
   <h3>Phone number<span *ngIf="phoneNumbers.length > 1">s</span></h3>
-  <mat-divider></mat-divider>
   <fieldset>
     <div 
     *ngFor="let contactPhone of phoneNumbers; let i = index"

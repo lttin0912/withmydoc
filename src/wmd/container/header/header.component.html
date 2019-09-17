@@ -41,55 +41,5 @@
       </mat-icon>
     </a>
   </mat-toolbar-row>
-  <mat-toolbar-row>
-    <a routerLink="/" class="wmd-nav-item">
-      <span class="fas fa-users"></span>&nbsp;
-      <span>Dashboard</span>
-    </a>
-    <a routerLink="/alerts" class="wmd-nav-item">
-      <span class="fas fa-exclamation-circle"></span>&nbsp;
-      <span>Patient Events</span>
-    </a>
-    <a routerLink="/alerts-config" class="wmd-nav-item">
-      <span class="fas fa-user-cog"></span>&nbsp;
-      <span>Alert Rules</span>
-    </a>
-    <span class="wmd-spacer"></span>
-    <mat-form-field>
-        <mat-label>
-            Hospital Name
-        </mat-label>
-        <mat-select>
-          <mat-option>
-            General Hospital
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-  </mat-toolbar-row>
-</mat-toolbar>
-<mat-toolbar color="primary" class="wmd-toolbar-large">
-  <mat-toolbar-row>
-    <mat-slide-toggle [checked]="true" (change)="showPatientsWithAlerts($event)">Show all alerts</mat-slide-toggle>
-    <span class="wmd-spacer"></span>
-    <mat-form-field class="wmd-nav-item">
-      <mat-select selected="name" (selectionChange)="sort($event)" [(ngModel)]="sortPropName">
-        <mat-option value="name">
-          Sort by patient name
-        </mat-option>
-        <mat-option value="id">
-          Sort by patient ID
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <span class="wmd-spacer"></span>
-    <mat-form-field class="wmd-nav-item">
-        <input (keyup)="filter($event)" placeholder="Enter a patients by name, ID or caretaker ID" matInput/>
-      </mat-form-field>
-      <button mat-button>
-        <mat-icon style="color: white">
-          search
-        </mat-icon>
-      </button>
-  </mat-toolbar-row>
 </mat-toolbar>
 </nav>  

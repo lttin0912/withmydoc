@@ -1,11 +1,11 @@
 export interface AddressInterface {
-  primaryAddress: 'true' | 'false' | boolean;
+  primaryAddress: boolean;
   addressId: string;
   address1: string;
   address2: string;
   address3: string;
-  seasonDate1: string;
-  seasonDate2: string;
+  seasonDate1: number;
+  seasonDate2: number;
   city: string;
   stateProv: string;
   zip: string;

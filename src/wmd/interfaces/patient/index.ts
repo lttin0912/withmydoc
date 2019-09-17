@@ -9,6 +9,7 @@ export interface PatientInterface {
     namePrefix?: string;
     nameMiddle?: string;
     nameSuffix?: string;
+    local?: string;
     address?: AddressInterface[];
     contactPhone?: ContactPhoneInterface[];
     contactEmail?: ContactEmailInterface[];

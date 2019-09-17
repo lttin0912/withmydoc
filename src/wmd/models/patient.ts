@@ -13,6 +13,7 @@ export class Patient implements PatientInterface {
         public namePrefix: string = null,
         public nameMiddle: string = null,
         public nameSuffix: string = null,
+        public local: string = 'US/en',
         public address?: AddressInterface[],
         public contactPhone?: ContactPhoneInterface[],
         public contactEmail?: ContactEmailInterface[],
