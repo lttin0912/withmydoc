@@ -7,6 +7,7 @@ import { PatientProfileComponent } from './views/profile/patient-profile/patient
 import { UpdateComponent } from './views/profile/update/update.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptor } from '../interceptors/http.interceptor';
+import { LoginComponent } from './views/login/login.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'patient-profile/uuid/:uuid',
     component: UpdateComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

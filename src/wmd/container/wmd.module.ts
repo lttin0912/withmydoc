@@ -77,6 +77,7 @@ import { PatientProfileComponent } from './views/profile/patient-profile/patient
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateComponent } from './views/profile/update/update.component';
 import { NgxNotifierModule } from 'ngx-notifier';
+import { LoginComponent } from './views/login/login.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { NgxNotifierModule } from 'ngx-notifier';
     NotesDialogComponent,
     UserConfigComponent,
     PatientProfileComponent,
-    UpdateComponent
+    UpdateComponent,
+    LoginComponent
   ],
   entryComponents: [
     AlertSessionDialogComponent,
