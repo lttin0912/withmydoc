@@ -15,38 +15,6 @@ export class HeaderComponent implements OnInit {
     private _patientRepositoryService: PatientRepositoryService,
     private _dialogService: MatDialog) { }
 
-  sort($event): void {
-    this._patientRepositoryService.sortPatients($event.value);
-  }
-
-  filter($event): void {
-    if ($event.target && $event.target.value && $event.target.value.replace(' ', '')) {
-        this._patientRepositoryService.filterPatientsByNameOrId($event.target.value);
-    }
-    else {
-      this.reset();
-    }
-  }
-
-  showPatientsWithAlerts($event): void {
-    if ($event && $event.checked) {
-      this._patientRepositoryService.filterPatientsWithAlerts(true);
-    }
-    else {
-      this._patientRepositoryService.filterPatientsWithAlerts(false);
-    }
-  }
-
-  reset(): void {
-    this._patientRepositoryService.viewAllPatients();
-  }
-
-  showUserConfig($event): void {
-    this._dialogService.open(UserConfigComponent);
-    $event.stopPropagation();
-    $event.preventDefault();
-  }
-
   ngOnInit() {
   }
 }

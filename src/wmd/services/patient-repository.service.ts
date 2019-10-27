@@ -1,162 +1,45 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject, of, Observable } from 'rxjs';
-import { Client } from '../interfaces/clients';
-import { VitalDetails } from '../interfaces/vital-details';
-import { DataAccessService } from './data-access.service';
+import { Subject } from 'rxjs';
 import { AlertsService } from './alerts.service';
+import { RulesService } from './rules.service';
+import { PatientInterface } from '../interfaces/patient';
+import { NotificationService } from './notification.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientRepositoryService {
-  visiblePatients: Subject<Client[]> = new Subject();
-  
-  private _patients: any = [];
-  
-  private _vitals: any[];
-  
-  private _allPatientsVithVitals: any[];
-
-  patientNamesAndIds: { value: number, name: string }[];
+  private _apiUri: string;
 
   constructor(
-    public dataAccessService: DataAccessService,
-    public alertsService: AlertsService) {
-    // Initialize the svc with resulting in joined collection of patients-> vitals = patient.vitals on patient.id;
-    this.getPatientsWithVitals();
+    private _dataAccessService: HttpClient,
+    private _alertsService: AlertsService,
+    private _rulesService: RulesService,
+    private _notificationService: NotificationService) {
+      this._apiUri = (
+        document.location.href.indexOf('localhost') > -1
+          ? environment.apiUri
+          : 'http://40.121.210.125:8020'
+      );
   }
 
-  getPatientNamesAndIds(): void {
-    console.log({
-      patients: this._patients
-    });
+  public patientDetails: Subject<PatientInterface> = new Subject();
 
-    this.patientNamesAndIds = this._patients.map((client: Client)=> {
-      return {
-          name: client.firstName + ' ' + client.lastName,
-          value: client.id
-        };
-     });
+  registerPatient(payload: any) {
+    return this._dataAccessService.post<PatientInterface>(`${this._apiUri}/api/patient`, payload);
   }
 
-  getPatientsWithVitals() {
-    this.dataAccessService.getClientVitals().then((vitals: BehaviorSubject<VitalDetails[]>) => {
-      vitals.subscribe((vitals) => {
-        this._vitals = vitals;
-        this.mergeClientVitals(this._patients, this._vitals);
-      });
-    });
-
-    this.dataAccessService.getClients().then((clients: BehaviorSubject<Client[]>) => {
-      clients.subscribe((clients) => {
-        this._patients = clients;
-        this.mergeClientVitals(this._patients, this._vitals);
-        this.getPatientNamesAndIds();
-      });
-    });
+  getPatientByUuid(patientUuid: string) {
+    return this._dataAccessService.get<PatientInterface>(`${this._apiUri}/api/patients/${patientUuid}`);
   }
 
-  sortPatients(sortType: 'name' | 'id' = 'name'): void {
-    const doSort = (
-      aVal: number | string | boolean,
-      bVal: number | string | boolean): number => aVal > bVal ? 1 : -1;
-
-    if (this._allPatientsVithVitals) {
-      this.visiblePatients.next(
-        this._allPatientsVithVitals.sort((patientA: Client, patientB: Client) => {
-          switch (sortType) {
-            case 'id': return doSort(patientA.id, patientB.id);
-            // Name falls through to default.
-            case 'name':
-            default: return doSort(patientA.lastName, patientB.lastName);
-          }
-        }));
-    }
+  getPatientByFirstName(patientFirstName: string) {
+    return this._dataAccessService.get<PatientInterface[]>(`${this._apiUri}/api/patients/firstName/${patientFirstName}`);
   }
 
-  filterPatientsWithAlerts(show = false): void {
-    const patientIdsWithAlerts = [];
-
-    this._allPatientsVithVitals.filter((patientWithVitals: Client) => {
-      patientWithVitals.vitals.forEach((vitalWithId) => {
-        if (show && this.alertsService.getClientAlertsWithVitalsAndId(patientWithVitals.vitals, vitalWithId.id)) {
-          patientIdsWithAlerts.push(vitalWithId.id);
-        } 
-        else if (!this.alertsService.getClientAlertsWithVitalsAndId(patientWithVitals.vitals, vitalWithId.id)) {
-            patientIdsWithAlerts.push(vitalWithId.id);
-        }
-      });
-    });
-
-    this.visiblePatients.next(this._allPatientsVithVitals.filter((patient)=> patientIdsWithAlerts.includes(patient.id)));
-  }
-
-  // WIP.
-  filterPatientsWithAlertsByAlertTypes(typesToShow: string[]): void {
-    const patientIdsWithAlerts = [];
-    if (!typesToShow) this.visiblePatients.next([]);
-    this._allPatientsVithVitals.forEach((patientWithVitals: Client) => {
-      patientWithVitals.vitals.forEach((vitalWithId) => {
-        const alertsTriggeredByUserVitals = this.alertsService.getClientAlertsWithVitalsAndId(patientWithVitals.vitals, vitalWithId.id);
-        if (alertsTriggeredByUserVitals) {
-          for (const alertStatusType in alertsTriggeredByUserVitals) {
-            if (!alertStatusType.hasOwnProperty(alertStatusType)) {
-              return;
-            }
-            
-            if (typesToShow.includes(alertsTriggeredByUserVitals[alertStatusType].toLowerCase())) {
-              patientIdsWithAlerts.push(vitalWithId.id);
-            }
-          }
-        } 
-        else if (!alertsTriggeredByUserVitals) {
-            patientIdsWithAlerts.push(vitalWithId.id);
-        }
-      });
-    });
-
-    this.visiblePatients.next(
-      this._allPatientsVithVitals.filter((patient)=> patientIdsWithAlerts.includes(patient.id)));
-  }
-
-  filterPatientsByNameOrId(nameOrId: string | number): void {
-    this.visiblePatients.next(this._allPatientsVithVitals.filter((patientVitals) => {
-      if (patientVitals.id.toString().indexOf(nameOrId.toString()) > -1) {
-        return true;
-      }
-
-      if ((patientVitals.firstName.toLowerCase()
-        + patientVitals.lastName.toLowerCase()).indexOf(nameOrId.toString().toLowerCase()) > -1) {
-        return true;
-      }
-    }));
-  }
-
-  viewAllPatients(): void {
-    this.visiblePatients.next(this._allPatientsVithVitals);
-  }
-
-  mergeClientVitals(clients: Client[], vitals: VitalDetails[]): Client[] | void {
-    const patientsVitals = clients.map((client: Client): Client => {
-      const matchingVitalRecords = vitals.filter((vital: VitalDetails) => vital.id === client.id);
-
-      if (matchingVitalRecords) {
-        // Add vitals accumulated matching id of patient.
-        client.vitals = matchingVitalRecords;
-      }
-
-      return client;
-    }).sort((a, b) => {
-      // Initial sort done here. 
-      return a.lastName > b.lastName ? 1 : -1
-    });
-
-
-
-    // Update collection.
-    this.visiblePatients.next(patientsVitals);
-
-    // Update cache.
-    this._allPatientsVithVitals = patientsVitals;
+  updatePatient(payload: PatientInterface) {
+    return this._dataAccessService.put<PatientInterface>(`${this._apiUri}/api/patient`, payload);
   }
 }

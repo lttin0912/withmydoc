@@ -4,7 +4,6 @@ import { WmdComponent } from './wmd.component';
 import { NotificationTableComponent } from '../common/notification-table/notification-table.component';
 import { NotificationRowComponent } from '../common/notification-row/notification-row.component';
 import { HeaderComponent } from './header/header.component';
-import { AlertConfigComponent } from './views/alerts/alert-config/alert-config.component';
 import { WmdRoutingModule } from './wmd-routing.module';
 import {
   MatAutocompleteModule,
@@ -48,28 +47,8 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
-import { AlertsComponent } from './views/alerts/alerts/alerts.component';
-import { AlertSessionDialogComponent } from './views/alerts/alert-session-dialog/alert-session-dialog.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { LegendComponent } from './views/dashboard/legend/legend.component';
-import { PatientsQuickGlanceGridComponent } from './views/dashboard/patients-quick-glance-grid/patients-quick-glance-grid.component';
-import {
-  PatientQuickGlanceTileComponent
-} from './views/dashboard/patients-quick-glance-grid/patient-quick-glance-tile/patient-quick-glance-tile.component';
-import {
-  PatientVitalsComponent
-} from './views/dashboard/patients-quick-glance-grid/patient-quick-glance-tile/patient-vitals/patient-vitals.component';
-
-import {
-  PatientVitalsTableComponent
-} from './views/dashboard/patients-quick-glance-grid/patient-quick-glance-tile/patient-vitals/patient-vitals-table/patient-vitals-table.component';
-
-import {
-  PatientMetricsChartComponent
-} from './views/dashboard/patients-quick-glance-grid/patient-quick-glance-tile/patient-metrics-chart/patient-metrics-chart.component';
-
 import { LineChartModule } from '@swimlane/ngx-charts';
-import { AlertConfigDialogComponent } from './views/alerts/alert-config-dialog/alert-config-dialog.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotesDialogComponent } from '../common/notes-dialog/notes-dialog.component';
 import { UserConfigComponent } from './header/user-config/user-config.component';
@@ -85,30 +64,14 @@ import { LoginComponent } from './views/login/login.component';
     NotificationTableComponent,
     NotificationRowComponent,
     HeaderComponent,
-    AlertConfigComponent,
-    AlertsComponent,
-    AlertSessionDialogComponent,
     DashboardComponent,
-    LegendComponent,
-    PatientsQuickGlanceGridComponent,
-    PatientQuickGlanceTileComponent,
-    PatientVitalsComponent,
-    PatientVitalsTableComponent,
-    PatientMetricsChartComponent,
-    AlertConfigDialogComponent,
     FooterComponent,
-    NotesDialogComponent,
     UserConfigComponent,
     PatientProfileComponent,
     UpdateComponent,
     LoginComponent
   ],
   entryComponents: [
-    AlertSessionDialogComponent,
-    PatientVitalsComponent,
-    AlertConfigDialogComponent,
-    NotesDialogComponent,
-    AlertConfigComponent,
     UserConfigComponent
   ],
   imports: [
@@ -168,10 +131,6 @@ import { LoginComponent } from './views/login/login.component';
   ],
   bootstrap: [
     WmdComponent
-  ],
-  exports: [
-    PatientsQuickGlanceGridComponent,
-    PatientQuickGlanceTileComponent
   ]
 })
 export class AppModule { }

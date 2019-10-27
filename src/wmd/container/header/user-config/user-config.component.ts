@@ -7,14 +7,6 @@ import { PatientRepositoryService } from 'src/wmd/services/patient-repository.se
   styleUrls: ['./user-config.component.scss']
 })
 export class UserConfigComponent implements OnInit {
-  
-  
-  constructor(public patientRepositoryService: PatientRepositoryService) {
-
-  }
-
-  ngOnInit() {
-    console.log(this.patientRepositoryService.patientNamesAndIds);
-  }
-
+  constructor(public patientRepositoryService: PatientRepositoryService) {}
+  ngOnInit() {}
 }
