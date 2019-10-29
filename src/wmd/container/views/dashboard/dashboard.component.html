@@ -1,3 +1,7 @@
-<mat-card>
-    No data
-</mat-card>
+
+<!--<wmd-legend *ngIf="isLoggedIn()"></wmd-legend>-->
+<wmd-devices *ngIf="isLoggedIn(); else login"></wmd-devices>
+<ng-template #login>
+    <wmd-login></wmd-login>
+</ng-template>
+

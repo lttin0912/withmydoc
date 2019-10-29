@@ -1,0 +1,24 @@
+<div class="card text-center device-card">
+  <div class="card-body">
+    <div class="logo">
+      <div class="logo-{{type}}"></div>
+    </div>
+
+    <h5 class="card-title">Device type</h5>
+
+    <p [ngClass]="{'text-success': device.status === STATUS_ACTIVE, 'text-danger': device.status === STATUS_ERROR, 'text-warning': device.status === STATUS_INACTIVE}">
+      <!--<fa-icon [icon]="device.status === STATUS_ACTIVE ? 'check' :  'exclamation'"></fa-icon>-->
+      <!--<span [jhiTranslate]="'devices.status.' + device.status" ></span>-->
+    </p>
+
+    <div [ngSwitch]="device.status">
+      <div *ngSwitchCase="STATUS_ACTIVE">
+        <button class="btn btn-outline-warning btn-block" (click)="onDisconnect()">Disconnect</button>
+        <!--<button class="btn btn-outline-secondary col-md-5 mt-1" jhiTranslate="devices.action.test" (click)="onTest()">Test</button>-->
+        <button class="btn btn-primary btn-block mt-1" (click)="onDownload()">Download</button>
+      </div>
+      <button *ngSwitchDefault class="btn btn-primary btn-block" (click)="onConnect()">Connect</button>
+    </div>
+
+  </div>
+</div>

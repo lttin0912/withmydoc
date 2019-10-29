@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PatientService} from '../../../services/patient.service';
 
 @Component({
   selector: 'wmd-dashboard',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private patientService: PatientService) { }
 
   ngOnInit() {
   }
 
+  // TODO  change this logic to use cookies
+  isLoggedIn(): boolean {
+    let isLoggedIn = false;
+    if (this.patientService._authToken.getValue() !== '') {
+      isLoggedIn = true;
+    }
+    return isLoggedIn;
+  }
 }

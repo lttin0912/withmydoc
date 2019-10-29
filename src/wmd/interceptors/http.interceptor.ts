@@ -12,7 +12,6 @@ import { map, catchError } from 'rxjs/operators';
 import { NotificationsService } from '../services/notifications.service';
 import { Injectable } from '@angular/core';
 
-
 /**
  * @service HttpInterceptor
  * @description Configures the HTTP middleware handler globally.
@@ -25,6 +24,10 @@ export class HttpInterceptor implements NgHttpInterceptor {
     constructor(private _notificationsService: NotificationsService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        request = request.clone({
+            withCredentials: true,
+        });
         const handler = next.handle(request);
 
         // Catch network errors.
@@ -46,7 +49,7 @@ export class HttpInterceptor implements NgHttpInterceptor {
                         /**
                          * This will show a toast after every succes.
                          * Since this is probably not desirable behavior,
-                         * depend on each implementation to fire success 
+                         * depend on each implementation to fire success
                          * messages to the user.
                          */
                         // this._notificationsService.success('Success!');

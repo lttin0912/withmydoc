@@ -57,6 +57,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UpdateComponent } from './views/profile/update/update.component';
 import { NgxNotifierModule } from 'ngx-notifier';
 import { LoginComponent } from './views/login/login.component';
+import { DevicesComponent } from './views/devices/devices.component';
+import { DeviceComponent } from './views/device/device.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { LoginComponent } from './views/login/login.component';
     UserConfigComponent,
     PatientProfileComponent,
     UpdateComponent,
-    LoginComponent
+    LoginComponent,
+    DevicesComponent,
+    DeviceComponent
   ],
   entryComponents: [
     UserConfigComponent

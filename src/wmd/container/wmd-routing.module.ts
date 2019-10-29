@@ -5,16 +5,18 @@ import { PatientProfileComponent } from './views/profile/patient-profile/patient
 import { UpdateComponent } from './views/profile/update/update.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptor } from '../interceptors/http.interceptor';
+
 import { LoginComponent } from './views/login/login.component';
+import {DevicesComponent} from './views/devices/devices.component';
 
 const routes: Routes = [
   {
     path: '',
-    component:  LoginComponent
+    component:  DashboardComponent
   },
   {
     path: 'Dashboard',
-    component:  LoginComponent
+    component:  DashboardComponent
   },
   {
     path: 'patient-profile',
@@ -32,6 +34,16 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'devices',
+    component: DevicesComponent
+
+  },
+  {
+    path: 'connect-device/ihealth',
+    component: DevicesComponent
+
   }
 ];
 

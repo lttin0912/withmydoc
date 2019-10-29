@@ -1,0 +1,23 @@
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-4">
+      <h2 jhiTranslate="devices.title">Devices</h2>
+    </div>
+    <div class="col-md-4 offset-md-4 " style="min-height: 80px">
+      <!--<jhi-alert ></jhi-alert>-->
+    </div>
+  </div>
+
+  <div class="d-md-flex flex-md-row flex-wrap" *ngIf="!loading">
+    <div class="p-1 flex-md-grow-1 flex-lg-grow-0" *ngFor="let type of deviceTypes">
+      <!--<jhi-device [device]="devices.get(type)" [type]="type" (deviceChanged)="refresh()"></jhi-device>-->
+      <wmd-device [device]="devices.get(type)" [type]="type" (deviceChanged)="refresh()"></wmd-device>
+    </div>
+  </div>
+
+  <div class="d-md-flex justify-content-center" *ngIf="loading">
+    <div class="spinner-grow text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
