@@ -1,0 +1,23 @@
+.wmd-profile-tile {
+    display: inline-block;
+    margin: 1em;
+    text-align: center;
+    width: 350px;
+
+    .wmd-profile-tile--icon {
+        font-size: 4em;
+        display: block;
+        margin: auto 1em 1em auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    .wmd-profile-tile--action {
+        display: block;
+        width: 100%;
+    }
+
+    .wmd-profile-tile--title {
+        margin-bottom: 10px;
+    }
+}

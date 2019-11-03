@@ -13,8 +13,8 @@ const routes: Routes = [
     component:  LoginComponent
   },
   {
-    path: 'Dashboard',
-    component:  LoginComponent
+    path: 'dashboard',
+    component:  DashboardComponent
   },
   {
     path: 'patient-profile',

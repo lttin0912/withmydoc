@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { profileTileData } from '../../../constants/profile-tile-data';
 
 @Component({
   selector: 'wmd-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
-
+export class DashboardComponent {
+  profileTiles = profileTileData;
   constructor() { }
 
-  ngOnInit() {
+  navigateTo(path: string): void {
   }
-
 }
