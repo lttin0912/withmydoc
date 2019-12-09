@@ -15,7 +15,7 @@ const routes: Routes = [
     component:  DashboardComponent
   },
   {
-    path: 'Dashboard',
+    path: 'dashboard',
     component:  DashboardComponent
   },
   {

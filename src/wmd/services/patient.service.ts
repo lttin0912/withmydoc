@@ -21,11 +21,15 @@ export class PatientService {
           : 'https://api.withmydoc.com'
       );
     }
+  // registerPatient(payload: any) {
+  //   return this._http.post<PatientInterface>(`${this._apiUri}/api/patient`, payload, {
+  //     headers: new HttpHeaders()
+  //         .set('Authorization', 'Bearer ' + this._authToken.getValue())
+  //   });
+  // }
+
   registerPatient(payload: any) {
-    return this._http.post<PatientInterface>(`${this._apiUri}/api/patient`, payload, {
-      headers: new HttpHeaders()
-          .set('Authorization', 'Bearer ' + this._authToken.getValue())
-    });
+    return this._http.post<PatientInterface>(`${this._apiUri}/api/patient`, payload);
   }
 
   getPatientByUuid(patientUuid: string) {
@@ -49,19 +53,29 @@ export class PatientService {
     });
   }
 
-  getRoles() {
+  getUsername(): Observable<any> {
+    return this._http.get(`${this._apiUri}/api/login/username`,{
+      headers: new HttpHeaders()
+          .set('Authorization', 'Bearer ' + this._authToken.getValue()),
+      observe: 'response'
+    });
 
   }
+
+  getAuthToken(authorization_code: string): Observable<any> {
+    return this._http.get(`${this._apiUri}/api/login/token?authorizationCode=${authorization_code}&redirectUri=http://localhost:5200`);
+  }
+
 
   login(authorization_code): Observable<any> {
     const body = new HttpParams()
         .set('grant_type', 'authorization_code')
         .set('code', authorization_code)
-        .set('client_id', 'withmydoc')
-        .set('client_secret', '133c1ea8-c440-45c5-b02b-6329c59de3f9')
-        .set('redirect_uri', 'https://patient.withmydoc.com');
+        .set('client_id', environment.client_id)
+        .set('client_secret', environment.client_secret)
+        .set('redirect_uri', environment.redirect_uri);
 
-    return this._http.post('https://sso.test.aptitud.io/auth/realms/aptitudio/protocol/openid-connect/token',
+    return this._http.post(environment.token_uri,
         body.toString(),
         {
           headers: new HttpHeaders()

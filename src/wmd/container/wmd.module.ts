@@ -5,6 +5,7 @@ import { NotificationTableComponent } from '../common/notification-table/notific
 import { NotificationRowComponent } from '../common/notification-row/notification-row.component';
 import { HeaderComponent } from './header/header.component';
 import { WmdRoutingModule } from './wmd-routing.module';
+import { CookieService } from 'ngx-cookie-service';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -73,7 +74,8 @@ import { DeviceComponent } from './views/device/device.component';
     UpdateComponent,
     LoginComponent,
     DevicesComponent,
-    DeviceComponent
+    DeviceComponent,
+    NotesDialogComponent
   ],
   entryComponents: [
     UserConfigComponent
@@ -130,6 +132,10 @@ import { DeviceComponent } from './views/device/device.component';
     },
     {
       provide: MAT_BOTTOM_SHEET_DATA,
+      useValue: []
+    },
+    {
+      provide: CookieService,
       useValue: []
     }
   ],

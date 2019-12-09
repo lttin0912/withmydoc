@@ -40,8 +40,8 @@
         person
       </mat-icon>
     </a>
-    <a mat-menu-item href="https://sso.test.aptitud.io/auth/realms/aptitudio/protocol/openid-connect/auth?client_id=withmydoc&redirect_uri=https://patient.withmydoc.com&response_type=code">Login</a>
-    <a mat-menu-item href="https://sso.test.aptitud.io/auth/realms/aptitudio/protocol/openid-connect/logout?redirect_uri=https://patient.withmydoc.com">Log out</a>
+    <a mat-menu-item [href]="getLoginUri()" (click)="deleteCookies()">Login</a>
+    <a mat-menu-item [href]="getLogoutUri()">Log out</a>
   </mat-toolbar-row>
 </mat-toolbar>
-</nav>  
+</nav>

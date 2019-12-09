@@ -1,7 +1,25 @@
-
 <!--<wmd-legend *ngIf="isLoggedIn()"></wmd-legend>-->
-<wmd-devices *ngIf="isLoggedIn(); else login"></wmd-devices>
-<ng-template #login>
-    <wmd-login></wmd-login>
+
+<h1>Welcome!</h1>
+<ng-template #dashboard>
+<mat-card
+    class="wmd-profile-tile"
+    *ngFor="let profileTile of profileTiles">
+    <mat-icon 
+        class="wmd-profile-tile--icon">
+        {{ profileTile.logo.ligature }}
+    </mat-icon>
+    <h5 class="wmd-profile-tile--title">{{ profileTile.title }}</h5>
+    <button 
+        class="wmd-profile-tile--action"
+        color="primary" 
+        mat-raised-button 
+        (click)="navigateTo(profileTile.link.href)">
+        {{ profileTile.link.label }}
+    </button>
+</mat-card>
 </ng-template>
+
+<!--<wmd-devices *ngIf="isLoggedIn(); else login"></wmd-devices>-->
+<wmd-login *ngIf="!isLoggedIn() ; else dashboard"></wmd-login>
 

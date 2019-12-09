@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {PatientService} from '../../../services/patient.service';
+import { profileTileData } from '../../../constants/profile-tile-data';
 
 @Component({
   selector: 'wmd-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
+
+  profileTiles = profileTileData;
 
   constructor(private patientService: PatientService) { }
 
-  ngOnInit() {
+  navigateTo(path: string): void {
   }
 
   // TODO  change this logic to use cookies
