@@ -36,9 +36,13 @@ COPY /nginx/nginx.conf /etc/nginx/conf.d/default.conf
 # COPY --from=builder /usr/src/patient-portal/src /usr/share/nginx/html
 # copy artifact build from the 'build environment'
 COPY --from=builder /usr/src/patient-portal/dist /usr/share/nginx/html
+COPY --from=builder /usr/src/patient-portal/startServer.sh /usr/share/nginx/startServer.sh
+
+RUN chmod a+x /usr/share/nginx/startServer.sh
 
 # Exposing ports.
 EXPOSE 80
 
 # Starting server.
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT [ "/usr/share/nginx/startServer.sh" ] 
