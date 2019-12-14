@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: patient-dev-portal
+spec:
+    selector:
+        matchLabels:
+            k8s-app: patient-dev-portal
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                k8s-app: patient-dev-portal
+        spec:
+            containers:
+            - name: patient-dev-portal
+              image: ${IMAGE_TAG}
+              imagePullPolicy: Always
+#              command: ["bin/sed -i 's/sso.test.aptitud.io/sso-dev.withmydoc.com/g' /usr/share/nginx/html/main.js"]
+              env:
+                  - name: API_URI
+                    value: http://api-dev.withmydoc.com
+                  - name: LOGIN_URI
+                    value: https://sso-dev.withmydoc.com
+                  - name: REDIRECT_URI
+                    value: https://patient-dev.withmydoc.com
+                  - name: LOGOUT_URI
+                    value: https://sso-dev.withmydoc.com
+                  - name: CLIENT_ID
+                    valueFrom:
+                      secretKeyRef:
+                        name: oauth-dev-secret
+                        key: withMyDocClientId
+                  - name: CLIENT_SECRET
+                    valueFrom:
+                      secretKeyRef:
+                        name: oauth-dev-secret
+                        key: withMyDocClientSecret
+                  - name: TOKEN_URI
+                    value: https://sso-dev.withmydoc.com
+---
+kind: Service
+apiVersion: v1
+metadata:
+    name: patient-dev-portal
+spec:
+    ports:
+        - port: 80
+          targetPort: 80
+    selector:
+        k8s-app: patient-dev-portal
+    type: LoadBalancer
