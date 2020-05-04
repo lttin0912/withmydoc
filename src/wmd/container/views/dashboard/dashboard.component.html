@@ -13,8 +13,8 @@
     <button 
         class="wmd-profile-tile--action"
         color="primary" 
-        mat-raised-button 
-        (click)="navigateTo(profileTile.link.href)">
+        mat-raised-button
+        routerLink="{{profileTile.link.href}}">
         {{ profileTile.link.label }}
     </button>
 </mat-card>

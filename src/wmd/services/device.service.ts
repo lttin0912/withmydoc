@@ -3,18 +3,21 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {DeviceType, IDevice} from '../models/device.model';
 import {createRequestOption} from '../common/utils/request-utils';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class DeviceService {
-    public resourceUrl = 'https://api.withmydoc.com/api/device';
+    public resourceUrl = environment.apiUri + '/api/device';
 
-    public resourceUrl_devices = 'https://portal.test.aptitud.io/aptitudio-ms-devices/api/devices';
+    public resourceUrl_devices = environment.apiUri + '/api/devices/owner';
 
     constructor(private http: HttpClient) {}
 
     query(auth_token: string, req?: any): Observable<HttpResponse<IDevice[]>> {
         const options = createRequestOption(req);
+
+        console.log('Inside query device.');
 
         return this.http.get<IDevice[]>(this.resourceUrl_devices, { params: options,
             headers: new HttpHeaders()

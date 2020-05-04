@@ -11,7 +11,7 @@ export const profileTileData = [{
     title: 'Devices',
     link: {
       label: 'Configure devices',
-      href: ''
+      href: '/devices'
     },
     logo: {
       ligature: 'important_devices'

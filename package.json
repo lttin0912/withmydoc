@@ -27,6 +27,7 @@
     "animations": "0.0.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
+    "debug": "^4.1.1",
     "express-engine": "^1.0.1",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",

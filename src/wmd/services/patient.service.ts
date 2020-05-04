@@ -63,7 +63,7 @@ export class PatientService {
   }
 
   getAuthToken(authorization_code: string): Observable<any> {
-    return this._http.get(`${this._apiUri}/api/login/token?authorizationCode=${authorization_code}&redirectUri=http://localhost:5200`);
+    return this._http.get(`${this._apiUri}/api/login/token?authorizationCode=${authorization_code}&redirectUri=${environment.redirect_uri}`);
   }
 
 
