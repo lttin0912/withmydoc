@@ -25,6 +25,7 @@ import { TIMEZONES } from 'src/wmd/constants/timezones';
 import { NAME_PREFIXES } from 'src/wmd/constants/name-prefixes';
 import { NAME_SUFFIXES } from 'src/wmd/constants/name-suffixes';
 import { CONTACT_TYPES } from 'src/wmd/constants/contact-typeS';
+import { formatDate } from '@angular/common';
 
 /**
  * @ngdoc component
@@ -185,9 +186,16 @@ export class PatientProfileComponent implements OnInit {
      * Handle update to an existing patient or creation of a new patient.
      */
     if (this.patientDetails && this.patientDetails.uuid) {
+      this.patientDetails.namePrefix = formData.namePrefix;
+      this.patientDetails.firstName = formData.firstName;
+      this.patientDetails.nameLast = formData.nameLast;
+      this.patientDetails.nameSuffix = formData.nameSuffix;
+      this.patientDetails.address = formData.address;
+      this.patientDetails.contactEmail = formData.contactEmail;
+      this.patientDetails.contactPhone = formData.contactPhone;
       // This is an update to an existing patient.
       this._subscriptions.push(
-        this._patientService.updatePatient(formData).subscribe((reply: any) => {
+        this._patientService.updatePatient(this.patientDetails).subscribe((reply: any) => {
           this._notificationsService.success('Success!');
           this._intialize();
         }));
