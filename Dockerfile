@@ -19,7 +19,7 @@ RUN npm install -g @angular/cli@7.3.9
 COPY . /usr/src/patient-portal
 
 # generate build
-RUN ng build --output-path=dist
+RUN ng build --output-path=dist --prod=true
 
 ### STAGE 2: Setup ###
 
