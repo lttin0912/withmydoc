@@ -243,9 +243,8 @@
   <div flex></div>
   <h3>Phone number<span *ngIf="phoneNumbers.length > 1">s</span></h3>
   <fieldset>
-    <div 
-    *ngFor="let contactPhone of phoneNumbers; let i = index"
-    formArrayName="contactPhone">
+    <ng-container *ngFor="let contactPhone of phoneNumbers; let i = index">
+    <div formArrayName="contactPhone">
     <h4 style="padding-top: 1em; " 
         *ngIf="phoneNumbers.length > 1">
         Phone number {{(i+1)}}
@@ -314,6 +313,7 @@
       </span>
     </div>
     <mat-divider *ngIf="i !== (phoneNumbers.length - 1)"></mat-divider>
+    </ng-container>
   </fieldset>
   <div flex></div>
   <div style="text-align: right; margin-top: 1em;">

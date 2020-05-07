@@ -5,6 +5,7 @@ import {PatientService} from '../../services/patient.service';
 import {ActivatedRoute} from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { UserConfigComponent } from './user-config/user-config.component';
 
 @Component({
   selector: 'wmd-header',
@@ -57,4 +58,11 @@ export class HeaderComponent implements OnInit {
       });
     }
   }
+
+  showUserConfig($event): void {
+    this._dialogService.open(UserConfigComponent);
+    $event.stopPropagation();
+    $event.preventDefault();
+  }
+  
 }
