@@ -19,7 +19,7 @@ spec:
 #              command: ["bin/sed -i 's/sso.test.aptitud.io/sso-dev.withmydoc.com/g' /usr/share/nginx/html/main.js"]
               env:
                   - name: API_URI
-                    value: http://api-dev.withmydoc.com
+                    value: https://api-dev.withmydoc.com
                   - name: LOGIN_URI
                     value: https://sso-dev.withmydoc.com
                   - name: REDIRECT_URI
