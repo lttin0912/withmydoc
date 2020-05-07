@@ -48,10 +48,10 @@ export class HeaderComponent implements OnInit {
 
         console.log('HeaderComponent Authorization Code: ' + this.authorization_code);
         if (this.authorization_code) {
-          this._patientService.getAuthToken(this.authorization_code).subscribe( data => {
+          this._patientService.login(this.authorization_code).subscribe( data => {
               console.log(data);
               this._patientService._authToken.next(data.access_token);
-              this._cookieService.set('AUTH-TOKEN-PATIENT', data.access_token);
+              //this._cookieService.set('AUTH-TOKEN-PATIENT', data.access_token);
           });
         }
       });

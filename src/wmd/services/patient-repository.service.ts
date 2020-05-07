@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { AlertsService } from './alerts.service';
 import { RulesService } from './rules.service';
 import { PatientInterface } from '../interfaces/patient';
@@ -27,19 +27,19 @@ export class PatientRepositoryService {
 
   public patientDetails: Subject<PatientInterface> = new Subject();
 
-  registerPatient(payload: any) {
+  registerPatient(payload: any) : Observable<PatientInterface>  {
     return this._dataAccessService.post<PatientInterface>(`${this._apiUri}/api/patient`, payload);
   }
 
-  getPatientByUuid(patientUuid: string) {
+  getPatientByUuid(patientUuid: string) : Observable<PatientInterface>  {
     return this._dataAccessService.get<PatientInterface>(`${this._apiUri}/api/patients/${patientUuid}`);
   }
 
-  getPatientByFirstName(patientFirstName: string) {
+  getPatientByFirstName(patientFirstName: string) : Observable<PatientInterface[]>  {
     return this._dataAccessService.get<PatientInterface[]>(`${this._apiUri}/api/patients/firstName/${patientFirstName}`);
   }
 
-  updatePatient(payload: PatientInterface) {
+  updatePatient(payload: PatientInterface) : Observable<PatientInterface>  {
     return this._dataAccessService.put<PatientInterface>(`${this._apiUri}/api/patient`, payload);
   }
 }

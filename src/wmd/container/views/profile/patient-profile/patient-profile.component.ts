@@ -76,7 +76,6 @@ export class PatientProfileComponent implements OnInit {
     [this.formArrayNames.address]: 'primaryAddress'
   };
 
-  @Input()
   patientDetails?: PatientInterface;
 
   private _subscriptions: Subscription[] = [];
@@ -190,6 +189,7 @@ export class PatientProfileComponent implements OnInit {
       this._subscriptions.push(
         this._patientService.updatePatient(formData).subscribe((reply: any) => {
           this._notificationsService.success('Success!');
+          this._intialize();
         }));
     } else {
       // This is a new patient creation.
@@ -209,7 +209,7 @@ export class PatientProfileComponent implements OnInit {
     $event.preventDefault();
 
     this.formGroup = this._viewModelToFormState(
-       this._originalFormState || new Patient()
+       this.patientDetails || new Patient()
     );
   }
 
@@ -328,10 +328,15 @@ export class PatientProfileComponent implements OnInit {
 
   private _intialize(): void {
     // If details are found, use them instead of defaults.
-    this._patientService.patientDetails.subscribe(patientDetails => {
+/*     this._patientService.patientDetails.subscribe(patientDetails => {
       this._originalFormState = patientDetails;
       this.formGroup = this._viewModelToFormState(patientDetails);
-    });
+    }); */
+
+    this._patientService.getPatient().subscribe(patientDetails => {
+      this.patientDetails = patientDetails;
+      this.formGroup = this._viewModelToFormState(patientDetails);
+    })
   }
 
   /**

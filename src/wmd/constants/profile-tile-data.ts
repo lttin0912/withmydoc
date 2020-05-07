@@ -1,8 +1,8 @@
 export const profileTileData = [{
-    title: 'Profile and account',
+    title: 'My Profile',
     link: {
-      label: 'Configure profile',
-      href: '#'
+      label: 'My Profile',
+      href: 'patient-profile'
     },
     logo: {
       ligature: 'account_box'

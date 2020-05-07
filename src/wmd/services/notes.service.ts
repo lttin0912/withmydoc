@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  BehaviorSubject } from 'rxjs';
+import {  BehaviorSubject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Injectable({
@@ -40,7 +40,7 @@ export class NotesService {
       }
    }
 
-  getNotesByClientId(id) {
+  getNotesByClientId(id) : Observable<any> {
     return this.data.pipe(filter((note)=> {
       console.log({note, id: Object.keys(note)[0], requestedId: id});
       return Object.keys(note)[0] == id;

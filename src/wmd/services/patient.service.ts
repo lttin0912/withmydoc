@@ -15,11 +15,7 @@ export class PatientService {
   _authToken: BehaviorSubject<string> = new BehaviorSubject('');
   constructor(
     private _http: HttpClient) {
-      this._apiUri = (
-        document.location.href.indexOf('localhost') > -1
-          ? environment.apiUri
-          : 'https://api.withmydoc.com'
-      );
+      this._apiUri = environment.apiUri;
     }
   // registerPatient(payload: any) {
   //   return this._http.post<PatientInterface>(`${this._apiUri}/api/patient`, payload, {
@@ -30,6 +26,13 @@ export class PatientService {
 
   registerPatient(payload: any) {
     return this._http.post<PatientInterface>(`${this._apiUri}/api/patient`, payload);
+  }
+
+  getPatient() {
+    return this._http.get<PatientInterface>(`${this._apiUri}/api/patient/userId`,{
+      headers: new HttpHeaders()
+          .set('Authorization', 'Bearer ' + this._authToken.getValue())
+    });
   }
 
   getPatientByUuid(patientUuid: string) {

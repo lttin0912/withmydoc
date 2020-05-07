@@ -6,6 +6,7 @@
 /out-tsc
 # Only exists if Bazel was run
 /bazel-out
+bin
 
 # dependencies
 /node_modules
@@ -24,7 +25,7 @@ speed-measure-plugin.json
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
+.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -40,6 +41,12 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+main.js
+lib
+.gradle
+local
+sbin
+startDevServer.sh
 
 # System Files
 .DS_Store
