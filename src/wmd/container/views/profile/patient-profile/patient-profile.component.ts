@@ -335,16 +335,15 @@ export class PatientProfileComponent implements OnInit {
   }
 
   private _intialize(): void {
-    // If details are found, use them instead of defaults.
-/*     this._patientService.patientDetails.subscribe(patientDetails => {
-      this._originalFormState = patientDetails;
-      this.formGroup = this._viewModelToFormState(patientDetails);
-    }); */
-
-    this._patientService.getPatient().subscribe(patientDetails => {
-      this.patientDetails = patientDetails;
-      this.formGroup = this._viewModelToFormState(patientDetails);
-    })
+    this._patientService.patientDetails.asObservable().subscribe(patientDetails => {
+      if(!patientDetails) {
+        this._patientService.getPatient().subscribe(patientDetails => {
+          this.patientDetails = patientDetails;
+          this.formGroup = this._viewModelToFormState(patientDetails);
+          this._patientService.patientDetails.next(patientDetails);
+        });
+      }
+    });
   }
 
   /**

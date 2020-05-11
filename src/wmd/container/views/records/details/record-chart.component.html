@@ -1,0 +1,11 @@
+<!-- just show chart for debugging for now -->
+<div *ngIf="(records?.length > 0)">
+    <canvas baseChart
+            [datasets]="chartData"
+            [options]="chartOptions"
+            [chartType]="chartType"
+            [colors]="chartColors"
+            (chartClick)="chartClicked($event)"
+            style="position: relative; height:40vh; width:80vw">
+    </canvas>
+</div>

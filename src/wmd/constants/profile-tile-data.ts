@@ -20,7 +20,7 @@ export const profileTileData = [{
     title: 'Reports & History',
     link: {
       label: 'Explore',
-      href: '#'
+      href: '/records/latest'
     },
     logo: {
       ligature: 'history'

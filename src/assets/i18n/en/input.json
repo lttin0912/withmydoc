@@ -1,0 +1,109 @@
+{
+    "input": {
+        "weight": {
+            "bmi": "Body mass index",
+            "bmi.short": "bmi",
+            "value": "Weight",
+            "value.short": "wt."
+        },
+        "sleep": {
+            "duration": "Duration",
+            "duration.short": "Dur.",
+            "efficiency": "Efficiency",
+            "efficiency.short": "Eff.",
+            "asleep": "Asleep",
+            "asleep.short": "Asleep",
+            "afterWakeup": "After wakeup",
+            "afterWakeup.short": "After wakeup",
+            "fallAsleep": "Fall asleep",
+            "fallAsleep.short": "Fall asleep",
+            "awake": "Awake",
+            "awake.short": "Awake",
+            "deep": "Deep",
+            "deep.short": "Deep",
+            "light": "Light",
+            "light.short": "Light",
+            "rem": "REM",
+            "rem.short": "REM",
+            "unmeasurable": "Unmeasurable",
+            "unmeasurable.short": "Unmeasurable",
+            "startTime": "Start",
+            "startTime.short": "Start",
+            "endTime": "End",
+            "endTime.short": "End",
+            "timeInBed": "Time in bed",
+            "timeInBed.short": "Time in bed"
+        },
+        "steps": {
+            "value": "Steps",
+            "value.short": "Steps"
+        },
+        "floors": {
+            "value": "Floors",
+            "value.short": "Floors"
+        },
+        "heartRate": "Heart rate",
+        "heartRate.short": "Hr.",
+        "heartrate": {
+            "value": "Heart rate",
+            "value.short": "Hr.",
+            "resting": "Resting",
+            "resting.short": "Rhr."
+        },
+        "fat": {
+            "value": "Fat",
+            "value.short": "fat"
+        },
+        "distance": {
+            "value": "Distance",
+            "value.short": "Dist."
+        },
+        "calories": {
+            "value": "Calories",
+            "value.short": "Cal.",
+            "level": "Level",
+            "mets": "METs"
+        },
+        "bloodPressure": {
+            "level": "Level",
+            "level.short": "Lvl.",
+            "systolic": "Systolic",
+            "systolic.short": "Sys.",
+            "diastolic": "Diastolic",
+            "diastolic.short": "Dia.",
+            "arrhythmia": "Arrhythmia",
+            "heartRate": "Heart rate",
+            "heartRate.short": "Hrt."
+        },
+        "spo2": "SpO2",
+        "spo2.short": "SpO2",
+        "bloodGlucose": {
+            "level": "Level",
+            "level.short": "",
+            "drugSituation": "Drug situation",
+            "dinnerSituation": "Dinner situation"
+        },
+        "food": {
+            "foodKind": "Kind",
+            "foodName": "Name",
+            "amount": "Amount"
+        },
+        "sport": {
+            "sport": "Name",
+            "start": "Start",
+            "end": "End"
+        },
+        "activity": {
+            "duration": "Duration",
+            "duration.short": "Dur.",
+            "distance": "Distance",
+            "distance.short": "Dist.",
+            "start": "Start",
+            "steps": "End"
+        },
+        "stress": {
+            "duration": "Duration",
+            "duration.short": "Duration"
+        }
+    }
+}

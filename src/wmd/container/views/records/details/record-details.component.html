@@ -1,0 +1,73 @@
+<div>
+    <div class="row record-details">
+        <div class="col-md-4">
+            <h2 [innerHTML]="formatGraphTypeLabel(type)"></h2>
+        </div>
+        <div class="col-md-8 text-right">
+            <div *ngIf="loading" class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" name="fromDp" [(ngModel)]="fromDate" ngbDatepicker #dFrom="ngbDatepicker" (ngModelChange)="onFromDateChanged()" (dateSelect)="onFromDateChanged()">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-outline-secondary" (click)="dFrom.toggle()" type="button">
+                                <div class="fas fa-calendar-alt"></div>
+                            </button>
+                        </div>
+                        <span>&nbsp;-&nbsp;</span>
+                        <input class="form-control" name="toDp" [(ngModel)]="toDate" ngbDatepicker #dTo="ngbDatepicker" (ngModelChange)="onToDateChanged()" (dateSelect)="onToDateChanged()">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="dTo.toggle()" type="button">
+                                <div class="fas fa-calendar-alt"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group wmd-range-selection">
+                    <div class="input-group ml-2">
+<!--                         <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_TODAY ? 'btn-primary': 'btn-outline-secondary'" (click)="today()">{{records.action.today}}</button>
+                        <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_THIS_WEEK ? 'btn-primary': 'btn-outline-secondary'" (click)="thisWeek()">{{records.action.thisWeek}}</button>
+                        <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_THIS_MONTH ? 'btn-primary': 'btn-outline-secondary'" (click)="thisMonth()">{{records.action.thisMonth}}</button>
+                        <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_MONTHS_3 ? 'btn-primary': 'btn-outline-secondary'" (click)="months3()">{{records.action.months3}}</button> -->
+                        <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_TODAY ? 'btn-primary': 'btn-outline-secondary'" (click)="today()">Today</button>
+                        <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_THIS_WEEK ? 'btn-primary': 'btn-outline-secondary'" (click)="thisWeek()">This Week</button>
+                        <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_THIS_MONTH ? 'btn-primary': 'btn-outline-secondary'" (click)="thisMonth()">This Month</button>
+                        <button class="btn ml-1" [ngClass]="activePeriod === PERIOD_MONTHS_3 ? 'btn-primary': 'btn-outline-secondary'" (click)="months3()">3 Months</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-4" *ngIf="records.length < 1">
+        <div class="col-md-12 text-center">
+            <p class="lead">
+                <span>No Data Found</span>
+            </p>
+        </div>
+    </div>
+
+<!--     <div class="row mt-2" *ngIf="records.length > 0">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2" style="display: inline-block;" *ngFor="let statistic of statistic?.statistics">
+            <wmd-record-statistic [statistic]="statistic"></wmd-record-statistic>
+        </div>
+    </div> -->
+    <!-- *ngIf="records.length > 0" -->
+    <div class="row mt-2">
+        <div class="col-md-10">
+            <div class="card ">
+                <div class="card-body p-2">
+                    <wmd-record-chart #chart [records]="records"></wmd-record-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

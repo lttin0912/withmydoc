@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { WmdComponent } from './wmd.component';
 import { NotificationTableComponent } from '../common/notification-table/notification-table.component';
 import { NotificationRowComponent } from '../common/notification-row/notification-row.component';
@@ -49,7 +49,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { LineChartModule } from '@swimlane/ngx-charts';
 import { FooterComponent } from './footer/footer.component';
 import { NotesDialogComponent } from '../common/notes-dialog/notes-dialog.component';
 import { UserConfigComponent } from './header/user-config/user-config.component';
@@ -60,6 +59,17 @@ import { NgxNotifierModule } from 'ngx-notifier';
 import { LoginComponent } from './views/login/login.component';
 import { DevicesComponent } from './views/devices/devices.component';
 import { DeviceComponent } from './views/device/device.component';
+import { RecordDetailsComponent, RecordChartComponent, RecordStatisticComponent } from './views/records/details';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { LatestRecordComponent } from './views/records/latest/latest-record.component';
+import { LatestRecordsComponent } from './views/records/latest/latest-records.component';
+import { RecordInfoModalComponent } from './views/records/modal';
+import { RecordTypeNameDirective } from '../directives/record-type-name.directive';
+import { RecordTypeIconComponent } from './views/record-type-icon/record-type-icon.component';
+import { RecordNameDirective } from '../directives/record-name.directive';
 
 @NgModule({
   declarations: [
@@ -75,10 +85,19 @@ import { DeviceComponent } from './views/device/device.component';
     LoginComponent,
     DevicesComponent,
     DeviceComponent,
-    NotesDialogComponent
+    NotesDialogComponent,
+    RecordDetailsComponent,
+    RecordChartComponent,
+    RecordStatisticComponent,
+    LatestRecordsComponent,
+    LatestRecordComponent,
+    RecordInfoModalComponent,
+    RecordTypeNameDirective,
+    RecordNameDirective,
+    RecordTypeIconComponent
   ],
   entryComponents: [
-    UserConfigComponent
+    UserConfigComponent, RecordInfoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -121,9 +140,13 @@ import { DeviceComponent } from './views/device/device.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    LineChartModule,
     HttpClientModule,
-    NgxNotifierModule
+    NgxNotifierModule,
+    NgbModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    ChartsModule,
+    TranslateModule.forRoot()
   ],
   providers: [
     {
@@ -137,8 +160,10 @@ import { DeviceComponent } from './views/device/device.component';
     {
       provide: CookieService,
       useValue: []
-    }
+    },
+    TranslateService
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [
     WmdComponent
   ]

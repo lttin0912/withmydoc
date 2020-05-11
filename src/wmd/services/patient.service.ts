@@ -11,7 +11,7 @@ export class PatientService {
   // ToDo: Replace with environment variable once deployment pipeline is prepared for it.
   private _apiUri: string;
 
-  public patientDetails: Subject<PatientInterface> = new Subject();
+  public patientDetails: BehaviorSubject<PatientInterface> = new BehaviorSubject(null);
   _authToken: BehaviorSubject<string> = new BehaviorSubject('');
   constructor(
     private _http: HttpClient) {

@@ -1,0 +1,23 @@
+{
+    "records": {
+        "latest": {
+            "title": "Reports & History"
+        },
+        "lastUpdated": "Last updated",
+        "timestamp": "Date / time",
+        "action": {
+            "today": "Today",
+            "thisWeek": "This week",
+            "thisMonth": "This month",
+            "months3": "3 months"
+        },
+        "statistic": {
+            "MIN": "Minimum",
+            "MAX": "Maximum",
+            "MEDIAN": "Median"
+        },
+        "message": {
+            "noRecords": "There are no records for selected period {{fromDate}} - {{toDate}}"
+        }
+    }
+}

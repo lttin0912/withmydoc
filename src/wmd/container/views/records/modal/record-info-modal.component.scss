@@ -1,0 +1,28 @@
+/* ==========================================================================
+Details record page styles
+========================================================================== */
+.record {
+    .record-values {
+        width: 100%;
+    }
+    .record-value-label {
+        font-weight: 300;
+        line-height: 1.2;
+        font-size: 1.2rem;
+        color: #6c757d;
+        text-align: right;
+    }
+    .record-value {
+        font-weight: 300;
+        line-height: 1.2;
+        font-size: 2rem;
+    }
+    .record-value-unit {
+        width: 30%;
+        font-weight: 300;
+        line-height: 1.2;
+        font-size: 1.3rem;
+        color: #6c757d;
+        text-align: left;
+    }
+}

@@ -1,0 +1,19 @@
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Reports & History</h2>
+        </div>
+        <div class="col-md-8 text-right">
+            <div *ngIf="loading" class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">        
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2" *ngFor="let record of records">
+          <wmd-latest-record [record]="record"></wmd-latest-record>
+        </div>
+
+    </div>
+</div>

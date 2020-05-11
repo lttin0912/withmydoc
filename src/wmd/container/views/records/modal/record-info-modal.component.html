@@ -1,0 +1,35 @@
+<div class="modal-body">
+    <div class="row record">
+        <div class="col-md-12 text-center">
+            <table style="height: 100%; width:100%">
+                <tbody>
+                <tr>
+                    <td class="align-middle">
+                        <div class="mt-1 mb-1">
+                            <wmd-record-type-icon [type]="record.recordType"></wmd-record-type-icon>
+                        </div>
+                        <div>
+                            <table class="record-values">
+                                <tr *ngFor="let value of record.values">
+                                    <td class="record-value-label text-uppercase">{{value.input}}</td>
+                                    <ng-container [ngSwitch]="value.type">
+                                        <td class="record-value" *ngSwitchCase="'NUMBER'">{{value.value | number:'1.0-2'}}</td>
+                                        <td class="record-value" *ngSwitchCase="'DATE_TIME'">{{toLocalDate(value.value) | date:'short'}}</td>
+                                        <td class="record-value" *ngSwitchDefault>{{value.value}}</td>
+                                    </ng-container>
+                                    <td class="record-value-unit" *ngIf="value.unit">{{value.unit}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="mt-1">
+                            <p class="text-uppercase text-primary font-weight-bold" [wmdRecordTypeName]="record.recordType"></p>
+                        </div>
+                        <div class="mt-1">
+                            <span *ngIf="record.deviceType">{{'devices.type.' + record.deviceType}}</span>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

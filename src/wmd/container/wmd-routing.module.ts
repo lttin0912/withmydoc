@@ -8,6 +8,8 @@ import { HttpInterceptor } from '../interceptors/http.interceptor';
 
 import { LoginComponent } from './views/login/login.component';
 import {DevicesComponent} from './views/devices/devices.component';
+import { LatestRecordsComponent } from './views/records/latest/latest-records.component';
+import { RecordDetailsComponent } from './views/records/details';
 
 const routes: Routes = [
   {
@@ -44,6 +46,15 @@ const routes: Routes = [
     path: 'connect-device/ihealth',
     component: DevicesComponent
 
+  },
+  {
+    path: 'records/latest',
+    component: LatestRecordsComponent
+
+  },
+  {
+      path: 'records/:type',
+      component: RecordDetailsComponent
   }
 ];
 

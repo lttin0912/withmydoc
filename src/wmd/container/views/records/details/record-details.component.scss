@@ -1,0 +1,92 @@
+/* ==========================================================================
+Details record page styles
+========================================================================== */
+.record-chart {
+  background: white;
+}
+
+form.form-inline {
+  .form-group {
+    input {
+      padding: 10px;
+    }
+
+    button {
+      min-width: 50px;
+    }
+  }
+
+  .fas {
+    font-size: 18px;
+  }
+}
+
+canvas {
+  min-height: 500px;
+}
+
+form {
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .input-group {
+    margin-bottom: 1rem;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .input-group > .form-control:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .input-group-append {
+    margin-left: -1px;
+    display: flex;
+  }
+
+  .input-group > .input-group-append:not(:last-child) > .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .input-group .btn[class*="btn-"] {
+    margin-bottom: 0;
+  }
+
+  .input-group > .input-group-append > .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  button,
+  input {
+    font-weight: 700;
+    padding: 10px;
+  }
+
+  button:not(.diabled) {
+    cursor: pointer;
+    background: transparent;
+    border-radius: 2px;
+    border-color: #dadada;
+    border-width: 2px;
+  }
+
+  button:hover {
+    opacity: 0.7;
+  }
+
+  .ngb-datepicker.dropdown-menu {
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    z-index: 9;
+    background: #fff;
+  }
+}
