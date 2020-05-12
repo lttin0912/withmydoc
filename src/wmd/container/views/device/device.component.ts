@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DeviceService} from '../../../services/device.service';
 import {Device, DeviceStatus, DeviceType, IDevice} from '../../../models/device.model';
-import {PatientService} from "../../../services/patient.service";
+import { UserService } from 'src/wmd/services/user.service';
 
 @Component({
   selector: 'wmd-device',
@@ -19,7 +19,7 @@ export class DeviceComponent implements OnInit {
   @Output() deviceChanged = new EventEmitter();
 
   constructor(private deviceService: DeviceService,
-              private patientService: PatientService) {}
+              private userService: UserService) {}
 
   ngOnInit() {
     if (!this.device) {
@@ -30,13 +30,13 @@ export class DeviceComponent implements OnInit {
   }
 
   public onConnect() {
-    this.deviceService.startConnect(this.patientService._authToken.getValue(), this.type).subscribe(resp => {
+    this.deviceService.startConnect(this.userService._authToken.getValue(), this.type).subscribe(resp => {
         window.location.href = resp.body.authorizeUrl;
     });
   }
 
   public onDisconnect() {
-    this.deviceService.disconnect(this.patientService._authToken.getValue(), this.device).subscribe(resp => {
+    this.deviceService.disconnect(this.userService._authToken.getValue(), this.device).subscribe(resp => {
       const result = resp.body;
       this.deviceChanged.emit(true);
     });

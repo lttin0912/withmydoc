@@ -7,7 +7,7 @@ import { MockHttpResponse } from '../interfaces/common/mock-http-response.interf
 import { createRequestOption } from '../utilities/request-util';
 import { IRecordStatistic } from '../models/record-statistics.model';
 import { IRecordsPage } from '../models/record-query.model';
-import { PatientService } from './patient.service';
+import { UserService } from './user.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -15,8 +15,8 @@ export class RecordService {
   public resourceUrl = environment.apiUri + '/api/v0/records';
   private authToken: string;
 
-  constructor(private http: HttpClient, private patientService: PatientService) {
-    this.authToken = this.patientService._authToken.getValue();
+  constructor(private http: HttpClient, private userService: UserService) {
+    this.authToken = this.userService._authToken.getValue();
   } 
 
   get headers() {

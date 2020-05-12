@@ -12,8 +12,10 @@ import { MetadataService } from 'src/wmd/services/meta-data.service';
 })
 export class LatestRecordComponent implements OnInit {
     @Input() record: IRecord;
+    translate: TranslateService;
 
-    constructor() {
+    constructor(public metaDataService: MetadataService) {
+        this.translate = metaDataService.translateService;
     }
 
     ngOnInit()  {

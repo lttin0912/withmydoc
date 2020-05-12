@@ -1,6 +1,6 @@
 
-<div *ngIf="record" class="card h-100 text-center record" [routerLink]="'/records/' + record.recordType">
-  <div class="card-body align-middle">
+<div *ngIf="record" class="card h-100 text-center record" [routerLink]="'/records/' + record.recordType" >
+  <div class="card-body align-middle" > 
         <table style="height: 100%; width:100%">
             <tbody>
             <tr>
@@ -8,11 +8,11 @@
                     <div class="mt-1 mb-1">
                         <wmd-record-type-icon [type]="record.recordType"></wmd-record-type-icon>
                     </div>
-                    <div>
+                    <div style="height: 70%;"> 
                         <table class="record-values" >
                             <tr *ngFor="let value of record.values">
                                 <ng-container *ngIf="value.primary !== false">
-                                    <td class="record-value-label text-uppercase"><span [wmdRecordName]="value.input"></span></td>
+                                    <td class="record-value-label"><span [innerHTML]="value.input + '.short' | translate"></span></td>
                                     <ng-container [ngSwitch]="value.type">
                                         <td class="record-value" *ngSwitchCase="'NUMBER'">{{value.value | number:'1.0-2'}}</td>
                                         <td class="record-value" *ngSwitchCase="'DATE_TIME'">{{toLocalDate(value.value) | date:'short'}}</td>
@@ -26,11 +26,11 @@
                         </table>
                     </div>
                     <div class="mt-1">
-                        <p class="text-uppercase text-primary font-weight-bold" [wmdRecordTypeName]="record.recordType"></p>
+                        <p class="text-uppercase text-primary font-weight-bold" [innerHTML]="record.recordType | translate"></p>
                     </div>
                     <div class="mt-1">
-                        <span>{{toLocalDate(record.timestamp) | date:'short'}}</span>
-                        <span *ngIf="record.deviceType">{{'devices.type.' + record.deviceType}}</span>
+                        <span style="padding-right: 5px;">{{toLocalDate(record.timestamp) | date:'short'}}</span>
+                        <span *ngIf="record.deviceType" >({{ 'devices.type.' + record.deviceType | translate }})</span>
                     </div>
                 </td>
             </tr>

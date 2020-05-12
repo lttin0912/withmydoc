@@ -1,7 +1,7 @@
-<div>
+<div style="padding: 10px;">
     <div class="row record-details">
         <div class="col-md-4">
-            <h2 [innerHTML]="formatGraphTypeLabel(type)"></h2>
+            <h2 [innerHTML]="type | translate"></h2>
         </div>
         <div class="col-md-8 text-right">
             <div *ngIf="loading" class="spinner-grow text-primary" role="status">
@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-
+    <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-md-12">
             <form class="form-inline">
@@ -55,11 +55,11 @@
         </div>
     </div>
 
-<!--     <div class="row mt-2" *ngIf="records.length > 0">
+    <div class="row mt-2" *ngIf="records.length > 0">
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2" style="display: inline-block;" *ngFor="let statistic of statistic?.statistics">
             <wmd-record-statistic [statistic]="statistic"></wmd-record-statistic>
         </div>
-    </div> -->
+    </div>
     <!-- *ngIf="records.length > 0" -->
     <div class="row mt-2">
         <div class="col-md-10">

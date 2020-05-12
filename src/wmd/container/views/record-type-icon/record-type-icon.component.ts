@@ -28,10 +28,7 @@ export class RecordTypeIconComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getIcon() {
-    this.subscription = this.metadataService.typeIcon(this.type).subscribe(value => {
-      this.icon = value;      
-      console.log('icon ' + this.icon);
-    });
+  private getIcon() {    
+      this.icon = this.metadataService.typeIcon(this.type); 
   }
 }

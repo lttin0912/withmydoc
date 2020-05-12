@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DeviceService} from '../../../services/device.service';
 import {DeviceType, IDevice} from '../../../models/device.model';
-import {PatientService} from '../../../services/patient.service';
+import { UserService } from 'src/wmd/services/user.service';
 
 @Component({
   selector: 'wmd-devices',
@@ -15,7 +15,7 @@ export class DevicesComponent implements OnInit {
   loading = false;
 
   constructor(private deviceService: DeviceService,
-              private patientService: PatientService) {}
+              private userService: UserService) {}
 
   ngOnInit() {
     this.refresh();
@@ -23,7 +23,7 @@ export class DevicesComponent implements OnInit {
 
   public refresh() {
     this.loading = true;
-    this.deviceService.query(this.patientService._authToken.getValue()).subscribe(resp => {
+    this.deviceService.query(this.userService._authToken.getValue()).subscribe(resp => {
       this.devices.clear();
       resp.body.forEach(d => this.devices.set(d.type, d));
       this.loading = false;

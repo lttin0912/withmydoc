@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import 'moment-timezone';
 import { IRecord, RecordValueType } from 'src/wmd/models/record.model';
 import { RecordInfoModalComponent } from '../modal/record-info-modal.component';
+import { MetadataService } from 'src/wmd/services/meta-data.service';
 
 @Component({
   selector: 'wmd-record-chart',
@@ -141,11 +142,14 @@ export class RecordChartComponent implements OnInit, OnChanges {
   public chartVisible = false;
 
   @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
-
+  
+  private translateService: TranslateService
+  
   constructor(
     private modalService: NgbModal,
-    private translateService: TranslateService,
-) { }
+    private metadataService: MetadataService) { 
+      this.translateService = metadataService.translateService;
+  }
 
   ngOnInit() {
 
@@ -238,26 +242,9 @@ export class RecordChartComponent implements OnInit, OnChanges {
     dataSet.fill = false;
     dataSet.pointRadius = 8;
     dataSet.pointHoverRadius = 10;
-    dataSet.label = this.translateLabel(input);
+    dataSet.label = input;
     dataSet.yAxisID = primaryAxis ? 'primary' : 'secondary';
-    //this.translateService.get(input).subscribe(t => (dataSet.label = t));
+    this.translateService.get(input).subscribe(t => (dataSet.label = t));
     return dataSet;
-  }
-
-  // TODO - To be done in better way
-  translateLabel(input: string) {
-    if(input && input.includes('heartrate'))
-      return 'Heart Rate';
-    else if(input && input.includes('systolic'))
-      return 'Systolic';
-    else if(input && input.includes('diastolic'))
-      return 'Diastolic';
-    else if(input && input.includes('weight.value'))
-      return 'Weight';
-    else if(input && input.includes('weight.bmi'))
-      return 'Body Mass Index';
-    else if(input && input.includes('spo2'))
-      return 'SpO2';
-    return input;
   }
 }

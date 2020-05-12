@@ -12,6 +12,7 @@ import {
 } from './../models/meta-data.model';
 import { MetadataRestService } from './meta-data-rest.service';
 import { IRecordValue, RecordValueType } from '../models/record.model';
+import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class MetadataService {
@@ -19,17 +20,24 @@ export class MetadataService {
     private inputs: Subject<IInput[]> = new ReplaySubject();
     private units: Subject<IUnit[]> = new ReplaySubject();
     private ucum: any;
+    private recordTypeIcons: Map<string, string> = new Map();
 
-    constructor(private metadataService: MetadataRestService, private translateService: TranslateService) {
-        this.loadRecordTypes();
-        this.loadInputs();
-        this.loadUnits();
+    constructor(private metadataService: MetadataRestService, 
+                public translateService: TranslateService,
+                private userService: UserService) {
+        if(userService.isAuthenticated) {
+            this.loadRecordTypes();
+            this.loadInputs();
+            this.loadUnits();
+        }
+        this.initTranslation();
+        this.loadIcons();
 
         this.ucum = UcumLhcUtils.getInstance();
     }
 
-    public typeIcon(typeKey: string): Observable<string> {
-        return this.recordTypes.pipe(map(types => this.getTypeIcon(typeKey, types)));
+    public typeIcon(typeKey: string): string {
+        return this.recordTypeIcons.get(typeKey);
     }
 
     public typeName(typeKey: string): Observable<string> {
@@ -172,5 +180,16 @@ export class MetadataService {
                 this.units.next(units);
                 this.units.complete();
             });
+    }
+
+    private initTranslation()  {
+        const browserLang = this.translateService.getBrowserLang();
+        this.translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+    }
+
+    private loadIcons() {
+        this.recordTypeIcons.set('record.bloodOxygen', 'O2.png');
+        this.recordTypeIcons.set('record.weight', 'weight.png');
+        this.recordTypeIcons.set('record.bloodPressure', 'bp.png');
     }
 }

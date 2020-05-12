@@ -13,9 +13,10 @@ import { RecordQuery } from 'src/wmd/models/record-query.model';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { Patient } from 'src/wmd/models/patient';
 import { PatientService } from 'src/wmd/services/patient.service';
 import { PatientInterface } from 'src/wmd/interfaces/patient';
+import { TranslateService } from '@ngx-translate/core';
+import { MetadataService } from 'src/wmd/services/meta-data.service';
 
 
 
@@ -45,21 +46,25 @@ export class RecordDetailsComponent implements OnInit, OnDestroy {
   activePeriod = '';
 
   private routeParamsSub: Subscription;
-  private queryParamsSub: Subscription;
+
+  translate: TranslateService;
 
   constructor(
     private _patientService: PatientService,
     private recordService: RecordService,
+    private metadataService: MetadataService,
     private route: ActivatedRoute,
     private router: Router,
     @Inject(LOCALE_ID) public locale: string,
-    private calendar: NgbCalendar
-  ) {
+    private calendar: NgbCalendar) {
 
     library.add(fas)
     
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getToday();
+
+    this.translate = metadataService.translateService;
+
   }
 
   ngOnInit() {
@@ -76,17 +81,6 @@ export class RecordDetailsComponent implements OnInit, OnDestroy {
       this.type = params.type;
     });
 
-    this.queryParamsSub = this.route.queryParams.subscribe(params => {
-      const { fromDate, toDate } = params;
-
-      if (fromDate) {
-        this.fromDate = this.toNgbDate(moment(fromDate, this.DATE_PARAM_FORMAT));
-      }
-      if (toDate) {
-        this.toDate = this.toNgbDate(moment(toDate, this.DATE_PARAM_FORMAT));
-      }
-    }); 
-
     if (!this.fromDate && !this.toDate) {
       this.thisWeek();
     }
@@ -96,7 +90,6 @@ export class RecordDetailsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeParamsSub.unsubscribe();
-    this.queryParamsSub.unsubscribe();
   }
 
   public onToDateChanged() {
@@ -210,17 +203,5 @@ export class RecordDetailsComponent implements OnInit, OnDestroy {
       return moment(dateStr);
     }
     return moment();
-  }
-
-  toNgbDate (date: Moment) : NgbDateStruct {
-    if(date)  return {year: 2020, month: 5, day: 8};
-    return this.calendar.getToday();
-  }
-
-  formatGraphTypeLabel(lbl: string)  {
-    if(lbl === 'weight')  return 'Weight';
-    else  if(lbl === 'bloodPressure')  return 'Blood Pressure';
-    else  if(lbl === 'bloodOxygen')  return 'SpO<sub>2</sub>';
-    else return'';
   }
 }

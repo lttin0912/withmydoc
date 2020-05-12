@@ -5,12 +5,12 @@
             <tr>
                 <td class="align-middle">
                     <div class="mt-1 mb-1">
-                        <p class="lead text-primary text-uppercase font-weight-bold">{{ 'records.statistic.' + statistic.type }}</p>
+                        <p class="lead text-primary text-uppercase font-weight-bold">{{ 'records.statistic.' + statistic.type | translate }}</p>
                     </div>
                     <table class="record-values">
                         <tr *ngFor="let value of statistic.values">
                             <ng-container *ngIf="value.primary !== false">
-                                <td class="record-value-label text-uppercase">{{ value.input + '.short' }}</td>
+                                <td class="record-value-label"><span [innerHTML]="value.input + '.short' | translate"></span></td>
                                 <td class="record-value">{{value.value | number:'1.0-2'}}</td>
                                 <td class="record-value-unit" *ngIf="value.unit">{{value.unit}}</td>
                             </ng-container>

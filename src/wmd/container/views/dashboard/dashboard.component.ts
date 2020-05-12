@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
-import {PatientService} from '../../../services/patient.service';
 import { profileTileData } from '../../../constants/profile-tile-data';
+import { UserService } from 'src/wmd/services/user.service';
 
 @Component({
   selector: 'wmd-dashboard',
@@ -11,7 +11,7 @@ export class DashboardComponent {
 
   profileTiles = profileTileData;
 
-  constructor(private patientService: PatientService) { }
+  constructor(private userService: UserService) { }
 
   navigateTo(path: string): void {
   }
@@ -19,7 +19,7 @@ export class DashboardComponent {
   // TODO  change this logic to use cookies
   isLoggedIn(): boolean {
     let isLoggedIn = false;
-    if (this.patientService._authToken.getValue() !== '') {
+    if (this.userService._authToken.getValue() !== '') {
       isLoggedIn = true;
     }
     return isLoggedIn;

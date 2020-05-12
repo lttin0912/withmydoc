@@ -4,6 +4,19 @@
     [insertOnTop]="true"
     [max]="3">
 </app-ngx-notifier>
-<wmd-header></wmd-header>
-<router-outlet></router-outlet>
-<wmd-footer></wmd-footer>
+<div>
+    <div>
+        <wmd-header></wmd-header>
+    </div>
+    <div>
+        <div style="display: inline-block; vertical-align: top; width: 15%;">
+            <sidebar></sidebar>
+        </div>
+        <div style="display: inline-block; width: 85%; padding: 0px;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div>
+        <wmd-footer></wmd-footer>
+    </div>
+</div>

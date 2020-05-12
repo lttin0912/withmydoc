@@ -1,0 +1,20 @@
+<div style="padding: 10px 0px 0px 20px;">
+    <div [ngSwitch]="isAuthenticated()">
+        <div id="menu-item" [routerLink]="['/']">
+            <span style="padding-right: 10px;"><i class="fa fa-home" aria-hidden="true"></i></span>
+            <span>Home</span>
+        </div>
+        <div id="menu-item" *ngSwitchCase="true" [routerLink]="['/records/latest']">
+            <span style="padding-right: 10px;"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
+            <span>Reports and History</span>
+        </div>
+        <div id="menu-item" *ngSwitchCase="true" >
+            <span style="padding-right: 10px;"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+            <span>Contact A Health Professional</span>
+        </div>
+        <div id="menu-item" *ngSwitchCase="true" [routerLink]="['/devices']">
+            <span style="padding-right: 10px;"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+            <span>My Devices</span>
+        </div>
+    </div>
+</div>
