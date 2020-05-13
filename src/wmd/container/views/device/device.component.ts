@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DeviceService} from '../../../services/device.service';
 import {Device, DeviceStatus, DeviceType, IDevice} from '../../../models/device.model';
 import { UserService } from 'src/wmd/services/user.service';
+import { MetadataService } from 'src/wmd/services/meta-data.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'wmd-device',
@@ -14,12 +16,17 @@ export class DeviceComponent implements OnInit {
   STATUS_ERROR = DeviceStatus.ERROR;
   STATUS_INACTIVE = DeviceStatus.INACTIVE;
 
+  translate: TranslateService;
+  
   @Input() device: IDevice;
   @Input() type: DeviceType;
   @Output() deviceChanged = new EventEmitter();
 
   constructor(private deviceService: DeviceService,
-              private userService: UserService) {}
+              private userService: UserService,
+              private metadataService: MetadataService) {
+          this.translate = metadataService.translateService;
+  }
 
   ngOnInit() {
     if (!this.device) {
