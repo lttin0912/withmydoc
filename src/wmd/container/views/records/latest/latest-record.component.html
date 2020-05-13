@@ -29,7 +29,7 @@
                         <p class="text-uppercase text-primary font-weight-bold" [innerHTML]="record.recordType | translate"></p>
                     </div>
                     <div class="mt-1">
-                        <span style="padding-right: 5px;">{{toLocalDate(record.timestamp) | date:'short'}}</span>
+                        <span style="padding-right: 5px;">{{ toLocalDate(record.timestamp) }}</span>
                         <span *ngIf="record.deviceType" >({{ 'devices.type.' + record.deviceType | translate }})</span>
                     </div>
                 </td>

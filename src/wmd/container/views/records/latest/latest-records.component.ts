@@ -41,7 +41,6 @@ export class LatestRecordsComponent implements OnInit {
 
   public refresh() {
     this.loading = true;
-    console.log('Reports refreshing');
     this.recordService.getLatestRecords(this.patientId).subscribe(resp => {
       this.records = resp;
       this.autoRefresh();

@@ -81,8 +81,6 @@ export class PatientProfileComponent implements OnInit {
 
   private _subscriptions: Subscription[] = [];
 
-  private _originalFormState;
-
   constructor(
     private _formBuilder: FormBuilder,
     private _patientService: PatientService,
@@ -215,7 +213,6 @@ export class PatientProfileComponent implements OnInit {
 
   onReset($event: Event): void {
     $event.preventDefault();
-
     this.formGroup = this._viewModelToFormState(
        this.patientDetails || new Patient()
     );
@@ -292,8 +289,7 @@ export class PatientProfileComponent implements OnInit {
       })]);
   }
 
-  private _viewModelToFormState(viewModel: PatientInterface): FormGroup {
-    console.log({ viewModel });
+  private _viewModelToFormState(viewModel: PatientInterface): FormGroup {    
     return this._formBuilder.group({
       namePrefix: [
         viewModel.namePrefix
@@ -342,6 +338,10 @@ export class PatientProfileComponent implements OnInit {
           this.formGroup = this._viewModelToFormState(patientDetails);
           this._patientService.patientDetails.next(patientDetails);
         });
+      }
+      else  {
+        this.patientDetails = patientDetails;
+        this.formGroup = this._viewModelToFormState(patientDetails);
       }
     });
   }

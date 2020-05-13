@@ -12,12 +12,7 @@ declare var $: any;
 })
 export class SidebarComponent implements OnInit {
     
-    //translate: TranslateService;
-
-    constructor(private userService: UserService,
-                private metadataService: MetadataService) {
-        //this.translate = metadataService.translateService;
-    }
+    constructor(private userService: UserService) {}
 
     ngOnInit() {
     }

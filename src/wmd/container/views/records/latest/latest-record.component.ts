@@ -22,8 +22,6 @@ export class LatestRecordComponent implements OnInit {
     }
 
     public toLocalDate(date) {
-        return moment(date)
-            .local(true)
-            .toDate();
+        return moment.unix(date).format('MMM DD hh:mm A');
     }
 }
