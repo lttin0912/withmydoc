@@ -19,9 +19,13 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() {
     this.refresh();
+    this.deviceService.deviceChanged.subscribe(() => {
+      this.refresh();
+    });
   }
 
   public refresh() {
+    console.log('****** Refreshing Devices!!!!');
     this.loading = true;
     this.deviceService.query(this.userService._authToken.getValue()).subscribe(resp => {
       this.devices.clear();

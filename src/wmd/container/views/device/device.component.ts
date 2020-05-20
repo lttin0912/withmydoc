@@ -4,6 +4,7 @@ import {Device, DeviceStatus, DeviceType, IDevice} from '../../../models/device.
 import { UserService } from 'src/wmd/services/user.service';
 import { MetadataService } from 'src/wmd/services/meta-data.service';
 import { TranslateService } from '@ngx-translate/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'wmd-device',
@@ -17,14 +18,18 @@ export class DeviceComponent implements OnInit {
   STATUS_INACTIVE = DeviceStatus.INACTIVE;
 
   translate: TranslateService;
-  
+
   @Input() device: IDevice;
   @Input() type: DeviceType;
   @Output() deviceChanged = new EventEmitter();
 
+  device_authorization_code: string;
+
   constructor(private deviceService: DeviceService,
               private userService: UserService,
-              private metadataService: MetadataService) {
+              private metadataService: MetadataService,
+              private router: Router,
+              private route: ActivatedRoute) {
           this.translate = metadataService.translateService;
   }
 
@@ -33,6 +38,15 @@ export class DeviceComponent implements OnInit {
       this.device = new Device();
       this.device.type = this.type;
       this.device.status = DeviceStatus.INACTIVE;
+    }
+
+    this.device_authorization_code = this.route.snapshot.queryParamMap.get('code');
+    if (this.device_authorization_code && (this.device.type === DeviceType.IHEALTH) && this.device.status === DeviceStatus.INACTIVE) {
+      this.deviceService.handleDeviceConnect(this.userService._authToken.getValue(), this.device_authorization_code)
+          .subscribe(resp => {
+            this.router.navigate(['/devices']);
+            this.deviceChanged.emit();
+          });
     }
   }
 
@@ -44,8 +58,8 @@ export class DeviceComponent implements OnInit {
 
   public onDisconnect() {
     this.deviceService.disconnect(this.userService._authToken.getValue(), this.device).subscribe(resp => {
-      const result = resp.body;
-      this.deviceChanged.emit(true);
+      // const result = resp.body;
+      this.deviceChanged.emit();
     });
   }
 
@@ -66,7 +80,7 @@ export class DeviceComponent implements OnInit {
   }
 
   public onDownload() {
-    console.log('***************** Device: '+ this.device);
+    console.log('***************** Device: ' + this.device);
     // this.deviceService.download(this.device).subscribe(resp => {
     //   this.alertService.success('devices.messages.download.success', null, null);
     // });

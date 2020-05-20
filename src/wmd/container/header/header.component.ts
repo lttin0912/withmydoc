@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
           this._userService.login(this.authorization_code).subscribe( data => {
               console.log(data);
               this._userService._authToken.next(data.access_token);
-              //this._cookieService.set('AUTH-TOKEN-PATIENT', data.access_token);
+              this._cookieService.set('AUTH-TOKEN-PATIENT', data.access_token);
           });
         }
       });

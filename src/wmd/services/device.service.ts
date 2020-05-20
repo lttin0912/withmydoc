@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {DeviceType, IDevice} from '../models/device.model';
@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class DeviceService {
     public resourceUrl = environment.apiUri + '/api/device';
+
+    public deviceChanged = new EventEmitter();
 
     public resourceUrl_devices = environment.apiUri + '/api/devices/owner';
 
@@ -30,8 +32,8 @@ export class DeviceService {
                 .set('Authorization', 'Bearer ' + auth_token), observe: 'response' });
     }
 
-    handleDeviceConnect(auth_token: string, type?: DeviceType, parameters?: any): Observable<HttpResponse<any>> {
-        return this.http.get<any>(`https://api.withmydoc.com/connect-device/ihealth`, {
+    handleDeviceConnect(auth_token: string, code: string, type?: DeviceType): Observable<HttpResponse<any>> {
+        return this.http.get<any>(`${this.resourceUrl}/connect-device/ihealth?code=${code}`, {
             headers: new HttpHeaders()
                 .set('Authorization', 'Bearer ' + auth_token), observe: 'response' });
     }
