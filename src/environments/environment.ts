@@ -5,13 +5,14 @@
 export const environment = {
   production: false,
 
-  apiUri: 'https://api-dev.withmydoc.com',
-  loginUri: 'https://sso-dev.withmydoc.com/auth/realms/aptitudio/protocol/openid-connect/auth?client_id=withmydoc&redirect_uri=http://localhost:4200&response_type=code',
-  logoutUri: 'https://sso-dev.withmydoc.com/auth/realms/aptitudio/protocol/openid-connect/logout?redirect_uri=http://localhost:4200',
+  apiUri: 'https://api.withmydoc.com',
+  //apiUri: 'https://localhost:8080',
+  loginUri: 'https://sso.withmydoc.com/auth/realms/aptitudio/protocol/openid-connect/auth?client_id=withmydoc&redirect_uri=https://patient.withmydoc.com&response_type=code',
+  logoutUri: 'https://sso.withmydoc.com/auth/realms/aptitudio/protocol/openid-connect/logout?redirect_uri=https://patient.withmydoc.com',
   client_id: 'withmydoc',
-  client_secret: 'a6cccff9-12e7-460b-8bf7-3a4ed9a9c748',
-  redirect_uri: 'http://localhost:4200',
-  token_uri: 'https://sso-dev.withmydoc.com/auth/realms/aptitudio/protocol/openid-connect/token'
+  client_secret: '133c1ea8-c440-45c5-b02b-6329c59de3f9',
+  redirect_uri: 'https://patient.withmydoc.com',
+  token_uri: 'https://sso.withmydoc.com/auth/realms/aptitudio/protocol/openid-connect/token'
 
 };
 
