@@ -28,7 +28,10 @@ export class PatientService {
   // }
 
   registerPatient(payload: any) {
-    return this._http.post<PatientInterface>(`${this._apiUri}/api/patient`, payload);
+    return this._http.post<PatientInterface>(`${this._apiUri}/api/patient`, payload, {
+        headers: new HttpHeaders()
+               .set('Authorization', 'Bearer ' + this.authToken)
+        });
   }
 
   getPatient() {
