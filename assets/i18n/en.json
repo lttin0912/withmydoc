@@ -1,0 +1,79 @@
+{ 
+    "home": {
+        "title": "AptitudIO",
+        "menu": {
+            "profile": "My profile",
+            "devices": "My devices",
+            "reports": "Reports and History",
+            "contact": "Contact a Health Professional"
+        }
+    },
+    "records":  {
+        "statistic": {
+            "MIN": "Minimum",
+            "MAX": "Maximum",
+            "MEDIAN": "Median"
+        }
+    },
+    "input": {
+        "weight": {
+            "bmi": "Body mass index",
+            "bmi.short": "BMI",
+            "value": "Weight",
+            "value.short": "WT."
+        },
+        "bloodPressure": {
+            "level": "Level",
+            "level.short": "Lvl.",
+            "systolic": "Systolic",
+            "systolic.short": "SYS.",
+            "diastolic": "Diastolic",
+            "diastolic.short": "DIA.",
+            "arrhythmia": "Arrhythmia",
+            "heartRate": "Heart rate",
+            "heartRate.short": "Hrt.",
+            "notes.short": "Notes"
+        },
+        "heartrate": {
+            "value": "Heart Rate",
+            "value.short": "HR.",
+            "resting": "Resting",
+            "resting.short": "Rhr."
+        },
+        "spo2": "SPO2",
+        "spo2.short": "SpO<sub>2</sub>"
+    },
+    "record": {
+        "bloodOxygen": "Blood Oxyzen",
+        "weight": "Weight",
+        "bloodPressure": "Blood Pressure"
+    },
+    "devices": {
+        "title": "My Devices",
+        "type": {
+            "FITBIT": "Fitbit",
+            "GARMIN": "Garmin",
+            "IHEALTH": "iHealth"
+        },
+        "status": {
+            "ACTIVE": "Connected",
+            "INACTIVE": "Not connected",
+            "ERROR": "Error"
+        },
+        "action": {
+            "connect": "Connect",
+            "disconnect": "Disconnect",
+            "test": "Test",
+            "download": "Download"
+        },
+        "messages": {
+            "test": {
+                "success": "Connected successfully",
+                "error": "Error occurred while trying to connect"
+            },
+            "download": {
+                "success": "Download triggered"
+            }
+        }
+    }
+}

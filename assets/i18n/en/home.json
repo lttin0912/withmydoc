@@ -1,0 +1,11 @@
+{
+    "home": {
+        "title": "AptitudIO",
+        "menu": {
+            "profile": "My profile",
+            "devices": "My devices",
+            "reports": "Reports and History",
+            "contact": "Contact a Health Professional"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "devices": {
+        "title": "My Devices",
+        "type": {
+            "FITBIT": "Fitbit",
+            "GARMIN": "Garmin",
+            "IHEALTH": "iHealth"
+        },
+        "status": {
+            "ACTIVE": "Connected",
+            "INACTIVE": "Not connected",
+            "ERROR": "Error"
+        },
+        "action": {
+            "connect": "Connect",
+            "disconnect": "Disconnect",
+            "test": "Test",
+            "download": "Download"
+        },
+        "messages": {
+            "test": {
+                "success": "Connected successfully",
+                "error": "Error occurred while trying to connect"
+            },
+            "download": {
+                "success": "Download triggered"
+            }
+        }
+    }
+}
